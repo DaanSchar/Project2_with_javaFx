@@ -46,6 +46,8 @@ public class Main extends Application
         {
             System.out.println("test");
         }
+        
+        //test comment 1
 
         launch(args);
     }
