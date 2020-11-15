@@ -41,14 +41,6 @@ public class Main extends Application
         n = graph.getN();
         m = graph.getM();
 
-        //  test
-        for(int i = 0; i < 4; i++)
-        {
-            System.out.println("test");
-        }
-        
-        //test comment 1
-
         launch(args);
     }
 
