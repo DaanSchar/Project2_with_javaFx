@@ -19,7 +19,6 @@ import java.io.IOException;
 public class Main extends Application
 {
 
-    //  ignore this comment. its just for some testing
 
     static Graph graph;
     static ColEdge[] e;
@@ -42,7 +41,11 @@ public class Main extends Application
         n = graph.getN();
         m = graph.getM();
 
-
+        //  test
+        for(int i = 0; i < 4; i++)
+        {
+            System.out.println("test");
+        }
 
         launch(args);
     }
