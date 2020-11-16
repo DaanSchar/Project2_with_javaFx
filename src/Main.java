@@ -53,7 +53,8 @@ public class Main extends Application
         for(int i = 0; i < 4; i++)
         {
             System.out.println("NEW FUNCTION!");
-            System.out.println("HEY THERE");
+            System.out.println("how's it going");
+
         }
 
         launch(args);
