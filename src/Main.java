@@ -49,7 +49,14 @@ public class Main extends Application
         n = graph.getN();
         m = graph.getM();
 
+
+        for(int i = 0; i < 4; i++)
+        {
+            System.out.println("NEW FUNCTION!");
+        }
+
         launch(args);
+
     }
 
 
