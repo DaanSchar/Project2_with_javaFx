@@ -1,5 +1,5 @@
 /**
- * class that draws the graph
+ * class that draws the graph and makes it interactable
  *
  * @author Daan
  */
@@ -29,7 +29,6 @@ public class GraphView
     private Group root;
     private Graph graph;
     private PickVertexColor pick;
-    private int r;
     private int windowSizeX;
     private int windowSizeY;
     private Colors colors;
@@ -67,14 +66,12 @@ public class GraphView
      * @param graph graph object of the graph
      * @param windowSizeX   horizontal size of the window
      * @param windowSizeY   vertical size of the window
-     * @param r radius of the circles we draw
      */
-    public void startGraphView(Graph graph, int windowSizeX, int windowSizeY, int r)
+    public void startGraphView(Graph graph, int windowSizeX, int windowSizeY)
     {
         this.graph = graph;
         this.windowSizeX = windowSizeX;
         this.windowSizeY = windowSizeY;
-        this.r = r;
 
 
         grid = new Grid(windowSizeX, windowSizeY, graph);
@@ -115,25 +112,25 @@ public class GraphView
             buttonScaler = 1.50;
         } else {
 
-            if(n < 20)
-            {
+            if (n < 20) {
                 buttonScaler = 1.40;
             } else {
 
-                if(n < 50)
-                {
+                if (n < 50) {
                     buttonScaler = 1.10;
                 } else {
 
-                    if(n < 100)
-                    {
+                    if (n < 100) {
                         buttonScaler = 1.00;
                     } else {
 
-                        if(n < 150)
-                        {
+                        if (n < 150) {
                             buttonScaler = 0.90;
-                        }}}}}
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -150,36 +147,36 @@ public class GraphView
             lineScaler = 7;
         } else {
 
-            if(m < 20)
-            {
+            if (m < 20) {
                 lineScaler = 6;
             } else {
 
-                if(m < 50)
-                {
+                if (m < 50) {
                     lineScaler = 4.5;
                 } else {
 
-                    if(m < 100)
-                    {
+                    if (m < 100) {
                         lineScaler = 3.5;
                     } else {
 
-                        if(m < 150)
-                        {
+                        if (m < 150) {
                             lineScaler = 2.0;
                         } else {
 
-                            if(m < 300)
-                            {
+                            if (m < 300) {
                                 lineScaler = 1.6;
                             } else {
 
-                                if(m < 500)
-                                {
+                                if (m < 500) {
                                     lineScaler = 1.4;
                                 }
-                        }}}}}}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     /**
@@ -224,12 +221,12 @@ public class GraphView
                     cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
 
                     //draws a shape on each adjacent vertex
-                    circles[j] = new Circle(cord.x, cord.y, r-10);
+                    circles[j] = new Circle(cord.x, cord.y, 5);
                     circles[j].setFill(Color.WHITE);
                     root.getChildren().add(circles[j]);
 
                     //makes a a border around the circle(by making a smaller circle inside the existing circle)
-                    circles2[j] = new Circle(cord.x, cord.y, r-11);
+                    circles2[j] = new Circle(cord.x, cord.y, 4);
                     circles2[j].setFill(Color.RED);
                     root.getChildren().add(circles2[j]);
                 }
@@ -541,9 +538,6 @@ public class GraphView
                 }
             }
         }
-
-        System.out.println(Arrays.toString(lineColorList));
-
     }
 
 
