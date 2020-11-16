@@ -114,8 +114,6 @@ public class Grid
                     if((i%gridScale == 0) && (j%gridScale == 0))
                     {
                         gridPositions[k] = String.valueOf(i + sideMenuSize) + " " + String.valueOf(j + topMenuSize);
-                        System.out.println(gridPositions.length);
-                        System.out.println(gridPositions[k]);
                         k++;
                     }
                 }

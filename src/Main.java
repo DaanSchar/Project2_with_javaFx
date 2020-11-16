@@ -35,6 +35,8 @@ public class Main extends Application
      * JAJAJA
      */
 
+    // hey this is a test whats up
+
 
 
     public static void main(String args[]) throws IOException
@@ -60,7 +62,7 @@ public class Main extends Application
         translate.setX(100);
 
         GraphView graphView = new GraphView();
-        graphView.startGraphView(graph,windowSizeX,windowSizeY, r);
+        graphView.startGraphView(graph,windowSizeX,windowSizeY);
         root = graphView.getGroup();
 
         Pane layout = new Pane();
