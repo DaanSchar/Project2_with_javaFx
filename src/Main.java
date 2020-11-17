@@ -73,7 +73,7 @@ public class Main extends Application
         translate.setX(100);
 
         GraphView graphView = new GraphView();
-        graphView.startGraphView(graph,windowSizeX,windowSizeY);
+        graphView.startGraphView(graph,windowSizeX,windowSizeY, r);
         root = graphView.getGroup();
 
         Pane layout = new Pane();

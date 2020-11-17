@@ -1,5 +1,5 @@
 /**
- * class that draws the graph and makes it interactable
+ * class that draws the graph
  *
  * @author Daan
  */
@@ -7,19 +7,29 @@
 package visuals.game;
 
 import gamemodes.PickVertexColor;
-import gamemodes.Warning;
 import graph.ColEdge;
 import graph.Colors;
 import graph.Graph;
 import graph.Vertex;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
-import java.util.Arrays;
 import java.util.Random;
 
 
@@ -29,6 +39,7 @@ public class GraphView
     private Group root;
     private Graph graph;
     private PickVertexColor pick;
+    private int r;
     private int windowSizeX;
     private int windowSizeY;
     private Colors colors;
@@ -39,13 +50,9 @@ public class GraphView
     private ColEdge[] e;
     private int n;
     private int m;
-
     private int[] connectedVertices;
-    private String[] lineColorList;
-    private int lineCount;
-    private Line[] lineList;
-    private Boolean[] needWarningList;
 
+    private Circle c;
     private Circle[] circles;
     private Circle[] circles2;
 
@@ -58,6 +65,21 @@ public class GraphView
     private double lineScaler;
     private Text currentVertex;
 
+    /**
+     *
+     * stuff for the timer
+     *
+     */
+
+    private static final int STARTTIME = 10; //import that from menu-choice
+    private Timeline countdown;
+    private Label countdownLabel = new Label();
+    private Label textLabel = new Label();
+    private Label resultLabel = new Label();
+    //enables binding of timeSeconds value to timerLabel text
+    private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+
+
 
     /**
      *  for some reason i cant use a constructor while linking an fxml file, so when creating a GraphView object,
@@ -66,29 +88,25 @@ public class GraphView
      * @param graph graph object of the graph
      * @param windowSizeX   horizontal size of the window
      * @param windowSizeY   vertical size of the window
+     * @param r radius of the circles we draw
      */
-    public void startGraphView(Graph graph, int windowSizeX, int windowSizeY)
+    public void startGraphView(Graph graph, int windowSizeX, int windowSizeY, int r)
     {
         this.graph = graph;
         this.windowSizeX = windowSizeX;
         this.windowSizeY = windowSizeY;
+        this.r = r;
 
-
+        vertexCount = 0;
         grid = new Grid(windowSizeX, windowSizeY, graph);
         vertex = new Vertex(graph);
         pick = new PickVertexColor(graph);
         colors = graph.getColor();
-        lineCount = 0;
 
         n = graph.getN();
         m = graph.getM();
         e = graph.getE();
 
-        lineList = new Line[m];
-        needWarningList = new Boolean[m];
-        vertexCount = 0;
-
-        makeLineColorList();
         scaleButtons();
         scaleLines();
         initArray();
@@ -97,6 +115,65 @@ public class GraphView
         makeRandomColorList();
         setHoverEvent();
         setButtonAction();
+        setTimer();
+    }
+
+    /**
+     * sets up the timer
+     *
+     */
+    private void setTimer()
+    {
+        //add label displaying countdown
+        countdownLabel.textProperty().bind(timeSeconds.asString());
+        countdownLabel.setTextFill(Color.BLACK);
+        //countdownLabel.setStyle("-fx-font-size: 4em;");
+
+        //add textLabel
+        textLabel.setText("COUNTDOWN");
+        textLabel.setTextFill(Color.BLACK);
+        //textLabel.setStyle("");
+
+
+        //add vBox containing countdownLabel and textLabel
+        VBox vb = new VBox(20);
+        vb.setAlignment(Pos.BASELINE_CENTER);
+        vb.setPrefWidth(100);
+        vb.getChildren().addAll(countdownLabel, textLabel);
+        vb.setLayoutX(15);
+        vb.setLayoutY(650);
+
+        root.getChildren().add(vb);
+
+        //make timeline to countdown
+        timeSeconds.set(STARTTIME);
+        countdown = new Timeline();
+        countdown.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+        countdown.playFromStart();
+
+        //determines end of game (when countdown stops)
+        countdown.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                countdown.stop();
+                //maybe call gamemode2.end method instead
+
+                //add resultLabel
+                resultLabel.setText("This is the end of the game.\n You used " + graph.colors.numberOfColors() + " colors.");
+                resultLabel.setTextFill(Color.BLACK);
+
+                //add resBox containing resultLabel
+                VBox resBox = new VBox(20);
+                resBox.setAlignment(Pos.BASELINE_CENTER);
+                resBox.setPrefWidth(100);
+                resBox.getChildren().add(resultLabel);
+                resBox.setLayoutX(100);
+                resBox.setLayoutY(350);
+                System.out.println("This is the end of the game");
+                System.out.println("You used " + graph.colors.numberOfColors() + " colors.");
+
+            }
+        });
     }
 
     /**
@@ -112,25 +189,25 @@ public class GraphView
             buttonScaler = 1.50;
         } else {
 
-            if (n < 20) {
+            if(n < 20)
+            {
                 buttonScaler = 1.40;
             } else {
 
-                if (n < 50) {
+                if(n < 50)
+                {
                     buttonScaler = 1.10;
                 } else {
 
-                    if (n < 100) {
+                    if(n < 100)
+                    {
                         buttonScaler = 1.00;
                     } else {
 
-                        if (n < 150) {
+                        if(n < 150)
+                        {
                             buttonScaler = 0.90;
-                        }
-                    }
-                }
-            }
-        }
+                        }}}}}
     }
 
 
@@ -147,36 +224,36 @@ public class GraphView
             lineScaler = 7;
         } else {
 
-            if (m < 20) {
+            if(m < 20)
+            {
                 lineScaler = 6;
             } else {
 
-                if (m < 50) {
+                if(m < 50)
+                {
                     lineScaler = 4.5;
                 } else {
 
-                    if (m < 100) {
+                    if(m < 100)
+                    {
                         lineScaler = 3.5;
                     } else {
 
-                        if (m < 150) {
+                        if(m < 150)
+                        {
                             lineScaler = 2.0;
                         } else {
 
-                            if (m < 300) {
+                            if(m < 300)
+                            {
                                 lineScaler = 1.6;
                             } else {
 
-                                if (m < 500) {
+                                if(m < 500)
+                                {
                                     lineScaler = 1.4;
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+                            }}}}}}
     }
 
     /**
@@ -221,12 +298,12 @@ public class GraphView
                     cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
 
                     //draws a shape on each adjacent vertex
-                    circles[j] = new Circle(cord.x, cord.y, 5);
+                    circles[j] = new Circle(cord.x, cord.y, r-10);
                     circles[j].setFill(Color.WHITE);
                     root.getChildren().add(circles[j]);
 
                     //makes a a border around the circle(by making a smaller circle inside the existing circle)
-                    circles2[j] = new Circle(cord.x, cord.y, 4);
+                    circles2[j] = new Circle(cord.x, cord.y, r-11);
                     circles2[j].setFill(Color.RED);
                     root.getChildren().add(circles2[j]);
                 }
@@ -271,56 +348,55 @@ public class GraphView
             Button b = buttonList[i];
 
             //sets the action of the button
-            b.setOnAction(actionEvent ->
+            b.setOnMouseClicked(actionEvent ->
             {
-                System.out.println("this is button" + b.getText());
-
-                //sets text to the text of the button, so text = 1 if button is 1
-                textForButtonAction = Integer.parseInt(b.getText());
-
-                //sets the vertex to be colored to text
-                pick.setPickedVertex(textForButtonAction);
-
-                //gets the current color of vertex and increases it by 1
-                pick.pickColor2(colors.getColorOfVertex(textForButtonAction));
-
-                colors.printColorArray();
-
-                //sets the color of the button to the associated color in the randColor list;
-                b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
-
-
-                //coloring the line red if 2 vertices have the same color.
-                checkIfNeedWarning();
-                for(int j = 0;j < m; j++)
+                //left click to increase color
+                if(actionEvent.getButton() == MouseButton.PRIMARY)
                 {
-                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                    if(needWarningList[j] == true)
-                    {
-                        lineList[j].setStroke(Color.RED);
-                    }   else {
-                        colorLine(j);
-                    }
+                    System.out.println("this is button" + b.getText());
+
+                    //sets text to the text of the button, so text = 1 if button is 1
+                    textForButtonAction = Integer.parseInt(b.getText());
+
+                    //sets the vertex to be colored to text
+                    pick.setPickedVertex(textForButtonAction);
+
+                    //gets the current color of vertex and increases it by 1
+                    pick.pickColorUp(colors.getColorOfVertex(textForButtonAction));
+
+                    colors.printColorArray();
+
+                    //sets the color of the button to the associated color in the randColor list;
+                    b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
+                }
+
+                //right click to decrease color
+                else if(actionEvent.getButton() == MouseButton.SECONDARY)
+                {
+                    System.out.println("this is button" + b.getText());
+
+                    //sets text to the text of the button, so text = 1 if button is 1
+                    textForButtonAction = Integer.parseInt(b.getText());
+
+                    //sets the vertex to be colored to text
+                    pick.setPickedVertex(textForButtonAction);
+
+                    //gets the current color of vertex and decreases it by 1 ---IMPORTANT ADD CHECK WHETHER COLOR IS <2
+                    //TO AVOID COLOR = -1
+                    pick.pickColorDown(colors.getColorOfVertex(textForButtonAction));
+
+                    colors.printColorArray();
+
+                    //sets the color of the button to the associated color in the randColor list;
+                    b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
                 }
 
             });
 
             //returns the copied button with the added actionEvent to the button list
             buttonList[i] = b;
-        }
-    }
 
-
-    public void checkIfNeedWarning()
-    {
-        for(int i = 0; i < m; i++)
-        {
-            if( (colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0)  )
-            {
-                needWarningList[i] = true;
-            }   else {
-                needWarningList[i] = false;
-                }
+            //
         }
     }
 
@@ -423,7 +499,6 @@ public class GraphView
     }
 
 
-
     /**
      *  retrieves a cord object from the positions list and places a button on that position
      *
@@ -467,7 +542,8 @@ public class GraphView
      * @param vertex1 starting vertex
      * @param vertex2 ending vertex
      */
-    public void makeLine(int vertex1, int vertex2) {
+    public void makeLine(int vertex1, int vertex2)
+    {
         //retrieves the coordinates of vertex 1 and 2 from positions
         Coordinate v1 = positions[vertex1];
         Coordinate v2 = positions[vertex2];
@@ -475,69 +551,29 @@ public class GraphView
         //draws a line from the coordinates of vertex 1 to the coordinates of vertex 2
         Line l = new Line(v1.x, v1.y, v2.x, v2.y);
         l.setStrokeWidth(lineScaler);
-        lineList[lineCount] = l;
 
-        colorLine(lineCount);
+        //making the line colors random:
+        int rand = (int)(Math.random()*100);
 
-        lineCount++;
-        root.getChildren().add(l);
-    }
-
-    /**
-     * colors the line
-     * @param index of the lineColorList array and lineList array
-     */
-    private void colorLine(int index)
-    {
-        if (lineColorList[index].equals("GREY")) {
-            lineList[index].setStroke(Color.GREY);
-        } else {
-            if (lineColorList[index].equals("WHITE")) {
-                lineList[index].setStroke(Color.WHITE);
-            } else {
-                if (lineColorList[index].equals("BEIGE")) {
-                    lineList[index].setStroke(Color.BEIGE);
-                } else {
-                    if (lineColorList[index].equals("DARKGRAY")) {
-                        lineList[index].setStroke(Color.DARKGRAY);
-                    }
-                }
-            }
-        }
-    }
-
-
-    /**
-     * makes an array containing all drawn lines
-     */
-    private void makeLineColorList()
-    {
-
-        lineColorList = new String[m];
-
-        for(int i = 0; i < m; i++)
+        //assigns one of 4 colors to each new line randomly
+        if(rand < 25)
         {
-            lineColorList[i] = new String();
-
-            //making the line colors random:
-            int rand = (int)(Math.random()*100);
-
-            //assigns one of 4 colors to each new line randomly
-            if(rand < 25)
+            l.setStroke(Color.GREY);
+        } else {
+            if(rand < 50)
             {
-                lineColorList[i] = "GREY";
+                l.setStroke(Color.WHITE);
             } else {
-                if (rand < 50) {
-                    lineColorList[i] = "WHITE";
+                if(rand < 75)
+                {
+                    l.setStroke(Color.BEIGE);
                 } else {
-                    if (rand < 75) {
-                        lineColorList[i] = "BEIGE";
-                    } else {
-                        lineColorList[i] = "DARKGRAY";
-                    }
+                    l.setStroke(Color.DARKGRAY);
                 }
             }
         }
+
+        root.getChildren().add(l);
     }
 
 

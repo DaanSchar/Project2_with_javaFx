@@ -11,8 +11,7 @@ import java.util.Scanner;
  * @author Leo
  */
 
-public class PickVertexColor
-{
+public class PickVertexColor {
     private int vertex;
     private int color;
     private int playNumber;
@@ -23,8 +22,7 @@ public class PickVertexColor
     private int n;
     private int newVertex;
 
-    public PickVertexColor(Graph graph)
-    {
+    public PickVertexColor(Graph graph) {
         colorsObject = graph.colors;
         scanner = new Scanner(System.in);
         warning = new Warning(graph);
@@ -38,27 +36,23 @@ public class PickVertexColor
     /**
      * lets the player pick a vertex to pick a color.
      */
-    public void pickVertex()
-    {
+    public void pickVertex() {
 
         boolean validVertex = false;
 
         System.out.println("Pick vertex");
         newVertex = scanner.nextInt();
 
-        if(newVertex <= n)
-        {
+        if (newVertex <= n) {
             validVertex = true;
         }
 
-        while(validVertex == false)
-        {
+        while (validVertex == false) {
 
             System.out.println("This vertex does not exist in your graph. please pick a different vertex");
             newVertex = scanner.nextInt();
 
-            if(newVertex <= n)
-            {
+            if (newVertex <= n) {
                 validVertex = true;
             }
 
@@ -69,8 +63,7 @@ public class PickVertexColor
     /**
      * let's you set the picked vertex for the player, this is useful for game mode 3
      */
-    public void setPickedVertex(int aVertex)
-    {
+    public void setPickedVertex(int aVertex) {
         vertex = aVertex;
         color = 0;
     }
@@ -80,21 +73,18 @@ public class PickVertexColor
      * lets the player pick a color. if the color the player picked isn't valid ai. there is an adjacent vertex with the
      * same color, it'll will ask the player to pick a different color.
      */
-    public void pickColor()
-    {
+    public void pickColor() {
         boolean needWarning = true;
 
-        while(needWarning)
-        {
+        while (needWarning) {
             System.out.println("Pick color");
-            int newColor = scanner.nextInt() ;
+            int newColor = scanner.nextInt();
             color = newColor;
 
             needWarning = warning.needWarning(vertex, color);
 
             System.out.print("need warning = " + needWarning);
-            if(needWarning)
-            {
+            if (needWarning) {
                 System.out.print(", please pick a different color");
             }
             System.out.println();
@@ -105,9 +95,14 @@ public class PickVertexColor
     }
 
 
-    public void pickColor2(int color)
-    {
+    public void pickColorUp(int color) {
         this.color = color + 1;
+        colorsObject.setColorOfVertex(vertex, this.color);
+    }
+
+    public void pickColorDown(int color)
+    {
+        this.color = color - 1;
         colorsObject.setColorOfVertex(vertex, this.color);
     }
 
