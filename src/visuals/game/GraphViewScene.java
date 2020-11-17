@@ -36,9 +36,28 @@ public class GraphViewScene extends Application {
         Translate translate = new Translate();
         translate.setX(100);
 
-        GraphView graphView = new GraphView();
-        graphView.startGraphView(graph, Main.windowSizeX,Main.windowSizeY);
-        root = graphView.getGroup();
+        GraphView graphView;
+
+        // determines which gamemode class will be run
+        if(menuChoices.getGameMode() == 1)
+        {
+            graphView = new GameMode1(graph, Main.windowSizeX,Main.windowSizeY);
+            root = graphView.getGroup();
+        }
+        if(menuChoices.getGameMode() == 2)
+        {
+            graphView = new GameMode2(graph, Main.windowSizeX,Main.windowSizeY);
+            root = graphView.getGroup();
+        }
+        if(menuChoices.getGameMode() == 3)
+        {
+            graphView = new GameMode3(graph, Main.windowSizeX,Main.windowSizeY);
+            root = graphView.getGroup();
+        }
+
+
+        System.out.println("gamemode = " + menuChoices.getGameMode());
+
 
         Pane layout = new Pane();
         layout.getChildren().addAll(root);

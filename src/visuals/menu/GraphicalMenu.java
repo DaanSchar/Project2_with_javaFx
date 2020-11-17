@@ -1,5 +1,6 @@
 package visuals.menu;
 
+import graph.ColEdge;
 import graph.GenerateRandomGraph;
 import graph.Graph;
 import graph.ReadGraph;
@@ -22,6 +23,9 @@ public class GraphicalMenu extends Application {
     public static MenuChoices MENU_CHOICES = null;
     private Scene scene;
     private Graph graph;
+    private ColEdge[] e;
+    private int n;
+    private int m;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -159,12 +163,9 @@ public class GraphicalMenu extends Application {
                         //  making a random graph object with the chosen vertices and chosen edges
                         GenerateRandomGraph randomGraphObject = new GenerateRandomGraph(MENU_CHOICES.getVertices(), MENU_CHOICES.getEdges());
 
-                        // making a graph object and passing it to the MENU_CHOICES object
-                        graph = new Graph();
-                        graph.e = randomGraphObject.getRandomGraph();
-                        graph.n = MENU_CHOICES.getVertices();
-                        graph.m = MENU_CHOICES.getEdges();
-                        MENU_CHOICES.setGraph(graph);
+                        // passing e to menuChoice and making a new graph object
+                        getMenuChoice().setE(randomGraphObject.getRandomGraph());
+                        MENU_CHOICES.makeGraph();
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -174,11 +175,10 @@ public class GraphicalMenu extends Application {
                     ReadGraph file = new ReadGraph(MENU_CHOICES.getGraphFileName());
 
                     // making a graph object and passing it to the MENU_CHOICES object
-                    graph = new Graph();
-                    graph.e = file.getGraph();
-                    graph.n = file.getFileVertices();
-                    graph.m = file.getFileEdges();
-                    MENU_CHOICES.setGraph(graph);
+                    MENU_CHOICES.setVertices(file.getFileVertices());
+                    MENU_CHOICES.setEdges(file.getFileEdges());
+                    MENU_CHOICES.setE(file.getGraph());
+                    MENU_CHOICES.makeGraph();
                 }
 
                 //  transition to the next scene by making a GraphViewScene object, inserting MENU_CHOICES, inserting
@@ -197,10 +197,6 @@ public class GraphicalMenu extends Application {
 
         //display
         scene = new Scene(root, 400, 300);
-
-       // stage.setTitle("Coloring Game");
-        //stage.setScene(scene);
-        //stage.show();
     }
 
     //retrieve the results
@@ -224,14 +220,25 @@ public class GraphicalMenu extends Application {
         private int vertices;
         private int edges;
         private Graph graph;
+        private ColEdge[] e;
 
         public MenuChoices() {
 
         }
 
-        public void setGraph(Graph graph)
+        public ColEdge[] getE()
         {
-            this.graph = graph;
+            return e;
+        }
+
+        public void setE(ColEdge[] e)
+        {
+            this.e = e;
+        }
+
+        public void makeGraph()
+        {
+            graph = new Graph();
         }
 
         public Graph getGraph()

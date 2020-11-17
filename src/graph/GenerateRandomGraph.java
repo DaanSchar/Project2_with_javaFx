@@ -29,14 +29,13 @@ public class GenerateRandomGraph {
         generateAllEdges();
         readGraph();
 
-        System.out.println("these are all possible edges:");
-        printColEdgeArray(graphWithAllEdges);
+        //System.out.println("these are all possible edges:");
+        //printColEdgeArray(graphWithAllEdges);
 
         initColEdge(randomGraph);
-  //      randomGraph = chooseRandomly();
         randomGraph = pickRandom();
-        System.out.println("the random graph generated: ");
-        printColEdgeArray(randomGraph);
+        //System.out.println("the random graph generated: ");
+        //printColEdgeArray(randomGraph);
     }
 
     /**

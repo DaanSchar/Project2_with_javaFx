@@ -27,7 +27,7 @@ public class GraphView
 {
 
     private Group root;
-    private Graph graph;
+    protected Graph graph;
     private PickVertexColor pick;
     private int windowSizeX;
     private int windowSizeY;
@@ -51,7 +51,7 @@ public class GraphView
 
     private int vertexCount;
     public Button button;
-    private Button[] buttonList;
+    protected Button[] buttonList;
     private String[] randColors;
     private Vertex vertex;
     private double buttonScaler;
@@ -67,7 +67,7 @@ public class GraphView
      * @param windowSizeX   horizontal size of the window
      * @param windowSizeY   vertical size of the window
      */
-    public void startGraphView(Graph graph, int windowSizeX, int windowSizeY)
+    public GraphView(Graph graph, int windowSizeX, int windowSizeY)
     {
         this.graph = graph;
         this.windowSizeX = windowSizeX;
@@ -102,7 +102,7 @@ public class GraphView
     /**
      * determines the size of the buttons
      */
-    private void scaleButtons()
+    protected void scaleButtons()
     {
 
         buttonScaler = 1.05;
@@ -137,7 +137,7 @@ public class GraphView
     /**
      * determines the size of the lines
      */
-    private void scaleLines()
+    protected void scaleLines()
     {
 
         lineScaler = 1.15;
@@ -182,7 +182,7 @@ public class GraphView
     /**
      * sets the effect for all buttons when hovering over them
      */
-    private void setHoverEvent()
+    protected void setHoverEvent()
     {
         //  loops because it needs these effects need to be applied to all buttons in the button list
         for(int i = 0; i < n; i++)
@@ -192,69 +192,88 @@ public class GraphView
             //  action taken when entering the button
             b.setOnMouseEntered(e ->
             {
-                //increases the size of the button by 1.1
-                b.setScaleX(buttonScaler * 1.1);
-                b.setScaleY(buttonScaler * 1.1);
-
-                textForButtonHover = Integer.parseInt(b.getText());
-                connectedVertices = vertex.getConnVerArray(textForButtonHover);
-
-                circles = new Circle[connectedVertices.length];
-                circles2 = new Circle[connectedVertices.length];
-                initCircles();
-
-                currentVertex = new Text();
-                currentVertex.setText(b.getText());
-                currentVertex.setY(55);
-                currentVertex.setX(95);
-                currentVertex.setFill(Color.WHITE);
-                root.getChildren().add(currentVertex);
-
-                for(int j = 0; j < connectedVertices.length; j++)
-                {
-                    //scales the buttons adjacent to the vertex by 1.25
-                    buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
-                    buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
-
-                    Coordinate cord = new Coordinate();
-                    cord.x = (int)buttonList[connectedVertices[j]-1].getLayoutX();
-                    cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
-
-                    //draws a shape on each adjacent vertex
-                    circles[j] = new Circle(cord.x, cord.y, 5);
-                    circles[j].setFill(Color.WHITE);
-                    root.getChildren().add(circles[j]);
-
-                    //makes a a border around the circle(by making a smaller circle inside the existing circle)
-                    circles2[j] = new Circle(cord.x, cord.y, 4);
-                    circles2[j].setFill(Color.RED);
-                    root.getChildren().add(circles2[j]);
-                }
+               hoverEventEntered(b);
             });
 
             //  action taken when exiting the button
             b.setOnMouseExited(e ->
             {
-                //sets the size of the button to the default size
-                b.setScaleX(buttonScaler);
-                b.setScaleY(buttonScaler);
-
-                textForButtonHover = Integer.parseInt(b.getText());
-
-                //removes the text
-                root.getChildren().remove(currentVertex);
-
-                //sets the size of all connected buttons back to the default size
-                for(int j = 0; j < connectedVertices.length; j++)
-                {
-                    buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
-                    buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
-
-                    //removes the shapes drawn on the adjacent vertices from root
-                    root.getChildren().remove(circles[j]);
-                    root.getChildren().remove(circles2[j]);
-                }
+                hoverEventExited(b);
             });
+        }
+    }
+
+    /**
+     * sets the event that will happen when entering the button
+     * @param b button we want to give these event conditions
+     */
+    protected void hoverEventEntered(Button b)
+    {
+        //increases the size of the button by 1.1
+        b.setScaleX(buttonScaler * 1.1);
+        b.setScaleY(buttonScaler * 1.1);
+
+        textForButtonHover = Integer.parseInt(b.getText());
+        connectedVertices = vertex.getConnVerArray(textForButtonHover);
+
+        circles = new Circle[connectedVertices.length];
+        circles2 = new Circle[connectedVertices.length];
+        initCircles();
+
+        currentVertex = new Text();
+        currentVertex.setText(b.getText());
+        currentVertex.setY(55);
+        currentVertex.setX(95);
+        currentVertex.setFill(Color.WHITE);
+        root.getChildren().add(currentVertex);
+
+        for(int j = 0; j < connectedVertices.length; j++)
+        {
+            //scales the buttons adjacent to the vertex by 1.25
+            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
+            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
+
+            Coordinate cord = new Coordinate();
+            cord.x = (int)buttonList[connectedVertices[j]-1].getLayoutX();
+            cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
+
+            //draws a shape on each adjacent vertex
+            circles[j] = new Circle(cord.x, cord.y, 5);
+            circles[j].setFill(Color.WHITE);
+            root.getChildren().add(circles[j]);
+
+            //makes a a border around the circle(by making a smaller circle inside the existing circle)
+            circles2[j] = new Circle(cord.x, cord.y, 4);
+            circles2[j].setFill(Color.RED);
+            root.getChildren().add(circles2[j]);
+        }
+    }
+
+
+    /**
+     * sets the event that will happen when exiting the button
+     * @param b button we want to give these event conditions
+     */
+    protected void hoverEventExited(Button b)
+    {
+        //sets the size of the button to the default size
+        b.setScaleX(buttonScaler);
+        b.setScaleY(buttonScaler);
+
+        textForButtonHover = Integer.parseInt(b.getText());
+
+        //removes the text
+        root.getChildren().remove(currentVertex);
+
+        //sets the size of all connected buttons back to the default size
+        for(int j = 0; j < connectedVertices.length; j++)
+        {
+            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
+            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
+
+            //removes the shapes drawn on the adjacent vertices from root
+            root.getChildren().remove(circles[j]);
+            root.getChildren().remove(circles2[j]);
         }
     }
 
@@ -262,7 +281,7 @@ public class GraphView
     /**
      * sets the action of all buttons of the graph
      */
-    private void setButtonAction()
+    protected void setButtonAction()
     {
         //  loops because it needs these effects need to be applied to all buttons in the button list
         for(int i = 0; i< n; i++)
@@ -273,40 +292,49 @@ public class GraphView
             //sets the action of the button
             b.setOnAction(actionEvent ->
             {
-                System.out.println("this is button" + b.getText());
-
-                //sets text to the text of the button, so text = 1 if button is 1
-                textForButtonAction = Integer.parseInt(b.getText());
-
-                //sets the vertex to be colored to text
-                pick.setPickedVertex(textForButtonAction);
-
-                //gets the current color of vertex and increases it by 1
-                pick.pickColor2(colors.getColorOfVertex(textForButtonAction));
-
-                colors.printColorArray();
-
-                //sets the color of the button to the associated color in the randColor list;
-                b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
-
-
-                //coloring the line red if 2 vertices have the same color.
-                checkIfNeedWarning();
-                for(int j = 0;j < m; j++)
-                {
-                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                    if(needWarningList[j] == true)
-                    {
-                        lineList[j].setStroke(Color.RED);
-                    }   else {
-                        colorLine(j);
-                    }
-                }
-
+                buttonAction(b);
             });
 
             //returns the copied button with the added actionEvent to the button list
             buttonList[i] = b;
+        }
+    }
+
+    /**
+     * method containing the action on button click event
+     *
+     * @param b button we want to give these conditions to
+     */
+    protected void buttonAction(Button b)
+    {
+        System.out.println("this is button" + b.getText());
+
+        //sets text to the text of the button, so text = 1 if button is 1
+        textForButtonAction = Integer.parseInt(b.getText());
+
+        //sets the vertex to be colored to text
+        pick.setPickedVertex(textForButtonAction);
+
+        //gets the current color of vertex and increases it by 1
+        pick.pickColor2(colors.getColorOfVertex(textForButtonAction));
+
+        colors.printColorArray();
+
+        //sets the color of the button to the associated color in the randColor list;
+        b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
+
+
+        //coloring the line red if 2 vertices have the same color.
+        checkIfNeedWarning();
+        for(int j = 0;j < m; j++)
+        {
+            //needWarningList represents if an edge contains 2 vertices that are the same color or not
+            if(needWarningList[j] == true)
+            {
+                lineList[j].setStroke(Color.RED);
+            }   else {
+                colorLine(j);
+            }
         }
     }
 
@@ -429,7 +457,7 @@ public class GraphView
      *
      * @param vertex vertex we want to place on the pane
      */
-    private void makeCircle(int vertex)
+    protected void makeCircle(int vertex)
     {
         //retrieves the coordinates of eacht vertex from positions
         Coordinate cord = new Coordinate();
@@ -467,7 +495,7 @@ public class GraphView
      * @param vertex1 starting vertex
      * @param vertex2 ending vertex
      */
-    public void makeLine(int vertex1, int vertex2) {
+    protected void makeLine(int vertex1, int vertex2) {
         //retrieves the coordinates of vertex 1 and 2 from positions
         Coordinate v1 = positions[vertex1];
         Coordinate v2 = positions[vertex2];
@@ -487,7 +515,7 @@ public class GraphView
      * colors the line
      * @param index of the lineColorList array and lineList array
      */
-    private void colorLine(int index)
+    protected void colorLine(int index)
     {
         if (lineColorList[index].equals("GREY")) {
             lineList[index].setStroke(Color.GREY);
