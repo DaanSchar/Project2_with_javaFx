@@ -3,20 +3,11 @@ package Main;
 import graph.ColEdge;
 import graph.Graph;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
-import menu.Menu;
-import visuals.game.GraphView;
 import visuals.menu.GraphicalMenu;
 
-import java.io.IOException;
 
 public class Main extends Application
 {
@@ -39,16 +30,12 @@ public class Main extends Application
 
     @Override
     public void start(Stage stage) throws Exception {
-        //-----MENU------
         GraphicalMenu menu = new GraphicalMenu();
         menu.start(stage);
         Scene menuScene = menu.getMenuScene();
         stage.setScene(menuScene);
 
-        stage.setTitle("title text");
+        stage.setTitle("Graph Game");
         stage.show();
-
-        GraphicalMenu.MenuChoices cc = GraphicalMenu.getMenuChoice();
-
     }
 }

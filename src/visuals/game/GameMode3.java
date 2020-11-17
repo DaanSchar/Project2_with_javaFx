@@ -11,7 +11,7 @@ public class GameMode3 extends GraphView{
         super(graph, windowSizeX, windowSizeY);
         this.graph = graph;
 
-        System.out.println("running gamemode3!");
+        System.out.println("running gamemode 3!");
     }
 
 }

@@ -9,7 +9,7 @@ public class GameMode2 extends GraphView{
         super(graph, windowSizeX, windowSizeY);
         super.graph = graph;
 
-        System.out.println("running gamemode3!");
+        System.out.println("running gamemode 2!");
     }
 
 
