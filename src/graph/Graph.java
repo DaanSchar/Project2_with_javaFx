@@ -1,6 +1,7 @@
 package graph;
 
 import menu.Menu;
+import visuals.menu.GraphicalMenu;
 
 /**
  * contains some usefull variables of the graph like the graph itself and the color object related to that graph.
@@ -20,10 +21,11 @@ public class Graph
      */
     public Graph()
     {
-        n = Menu.getVertices();
-        m = Menu.getEdges();
-        e = Menu.getGraph();
+        n = GraphicalMenu.getMenuChoice().getVertices();
+        m = GraphicalMenu.getMenuChoice().getEdges();
+        e = GraphicalMenu.getMenuChoice().getE();
         colors = new Colors(n);
+        System.out.println("n = " + n);
     }
 
     /**

@@ -29,6 +29,7 @@ public class GraphViewScene extends Application {
     {
         this.menuChoices = menuChoices;
         this.graph = menuChoices.getGraph();
+        System.out.println("brrrrrrrr"+graph.getM());
     }
 
     @Override
