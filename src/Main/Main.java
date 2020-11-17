@@ -50,21 +50,5 @@ public class Main extends Application
 
         GraphicalMenu.MenuChoices cc = GraphicalMenu.getMenuChoice();
 
-
-        Translate translate = new Translate();
-        translate.setX(100);
-
-        GraphView graphView = new GraphView();
-        graphView.startGraphView(graph,windowSizeX,windowSizeY);
-        root = graphView.getGroup();
-
-        Pane layout = new Pane();
-        layout.getChildren().addAll(root);
-        layout.setBackground(new Background(new BackgroundFill(Color.web("#282828"), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        graphViewScene = new Scene(layout,windowSizeX, windowSizeY);
-
-
-
     }
 }
