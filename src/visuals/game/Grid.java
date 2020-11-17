@@ -108,7 +108,6 @@ public class Grid
         while (k < (totalGridPositions))
         {
             for (int i = 1; i <= h; i++)
-            {
                 for (int j = 1; j <= v; j++)
                 {
                     if((i%gridScale == 0) && (j%gridScale == 0))
@@ -119,7 +118,7 @@ public class Grid
                 }
             }
         }
-    }
+
 
 
     /**

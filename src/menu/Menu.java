@@ -145,7 +145,6 @@ public class Menu
         System.out.println("What graph would you like to import?(type in: graph04_2020.txt)");
 
         //making a graph.ReadGraph object and inputting the next String
-
         ReadGraph file = new ReadGraph(scanner.next());
 
 
