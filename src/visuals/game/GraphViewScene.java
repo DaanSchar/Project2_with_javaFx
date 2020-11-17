@@ -37,6 +37,8 @@ public class GraphViewScene extends Application {
         translate.setX(100);
 
         GraphView graphView;
+
+        // determines which gamemode class will be run
         if(menuChoices.getGameMode() == 1)
         {
             graphView = new GameMode1(graph, Main.windowSizeX,Main.windowSizeY);
