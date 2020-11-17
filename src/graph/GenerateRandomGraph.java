@@ -134,8 +134,8 @@ public class GenerateRandomGraph {
      * randomly shuffles all possible edges and puts them inside a gameVisuals.ColEdge[]
      * @return gameVisuals.ColEdge[] randomGraph
      */
- public ColEdge[] pickRandom()
-   {
+     public ColEdge[] pickRandom()
+     {
        //  The pathArray is defined as the number of Edges picked by the Player
        //  This will later create the path of how many randomGraph Edges are returned
        int[] pathArray = new int[chosenEdges];
@@ -163,7 +163,6 @@ public class GenerateRandomGraph {
                 totalEdgesArray[index] = temp;
         }
 
-       System.out.println(Arrays.toString(totalEdgesArray));
 
        //   In the bound of chosenEdges, assign the pathArray values to the totalEdgesArray values
         for(int i = 0 ; i < chosenEdges; i++)
@@ -179,5 +178,5 @@ public class GenerateRandomGraph {
         }
 
         return randomGraph;
-   }
+     }
 }

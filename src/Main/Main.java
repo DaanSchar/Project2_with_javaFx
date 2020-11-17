@@ -1,3 +1,5 @@
+package Main;
+
 import graph.ColEdge;
 import graph.Graph;
 import javafx.application.Application;
@@ -12,50 +14,42 @@ import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 import menu.Menu;
 import visuals.game.GraphView;
+import visuals.menu.GraphicalMenu;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class Main extends Application
 {
 
-
-    static Graph graph;
-    static ColEdge[] e;
-    static int n;
-    static int m;
+    private Scene graphViewScene;
+    public static Graph graph;
+    public static ColEdge[] e;
+    public static int n;
+    public static int m;
     static final int r = 15;
-    static final int windowSizeX = 1000;
-    static final int windowSizeY = 800;
-    Group root;
-
-    /**
-     * TESTTESTTEST
-     *
-     */
-
-    // hey this is a test whats up
+    public static final int windowSizeX = 1000;
+    public static final int windowSizeY = 800;
+    public static Group root;
 
 
-
-    public static void main(String args[]) throws IOException
+    public static void main(String args[])
     {
-        //starts the menu
-        Menu.startMenu();
-
-        graph = Menu.getGraphObject();
-        e = graph.getE();
-        n = graph.getN();
-        m = graph.getM();
-
         launch(args);
     }
 
-
     @Override
-    public void start(Stage Stage) throws IOException {
+    public void start(Stage stage) throws Exception {
+        //-----MENU------
+        GraphicalMenu menu = new GraphicalMenu();
+        menu.start(stage);
+        Scene menuScene = menu.getMenuScene();
+        stage.setScene(menuScene);
 
-        Parent parent = FXMLLoader.load(getClass().getResource("visuals/game/test.fxml"));
+        stage.setTitle("title text");
+        stage.show();
+
+        GraphicalMenu.MenuChoices cc = GraphicalMenu.getMenuChoice();
+
 
         Translate translate = new Translate();
         translate.setX(100);
@@ -65,14 +59,12 @@ public class Main extends Application
         root = graphView.getGroup();
 
         Pane layout = new Pane();
-        layout.getChildren().addAll(parent, root);
+        layout.getChildren().addAll(root);
         layout.setBackground(new Background(new BackgroundFill(Color.web("#282828"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Scene scene = new Scene(layout,windowSizeX, windowSizeY);
-        Stage.setScene(scene);
+        graphViewScene = new Scene(layout,windowSizeX, windowSizeY);
 
-        Stage.setTitle("title text");
-        Stage.show();
+
+
     }
-
 }
