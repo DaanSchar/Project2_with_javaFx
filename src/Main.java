@@ -32,7 +32,6 @@ public class Main extends Application
     /**
      * TESTTESTTEST
      *
-     * JAJAJA
      */
 
     // hey this is a test whats up
@@ -49,16 +48,7 @@ public class Main extends Application
         n = graph.getN();
         m = graph.getM();
 
-
-        for(int i = 0; i < 4; i++)
-        {
-            System.out.println("NEW FUNCTION!");
-            System.out.println("how's it going");
-
-        }
-
         launch(args);
-
     }
 
 
