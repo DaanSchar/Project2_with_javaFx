@@ -14,6 +14,7 @@ import graph.Graph;
 import graph.Vertex;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -26,7 +27,7 @@ import java.util.Random;
 public class GraphView
 {
 
-    private Group root;
+    public Group root;
     protected Graph graph;
     private PickVertexColor pick;
     private int windowSizeX;
@@ -292,10 +293,10 @@ public class GraphView
             //sets the action of the button
             b.setOnAction(actionEvent ->
             {
-                buttonAction(b);
+                    buttonAction(b);
             });
 
-            //returns the copied button with the added actionEvent to the button list
+        //returns the copied button with the added actionEvent to the button list
             buttonList[i] = b;
         }
     }
@@ -316,7 +317,7 @@ public class GraphView
         pick.setPickedVertex(textForButtonAction);
 
         //gets the current color of vertex and increases it by 1
-        pick.pickColor2(colors.getColorOfVertex(textForButtonAction));
+        pick.pickColorUp(colors.getColorOfVertex(textForButtonAction));
 
         colors.printColorArray();
 

@@ -259,7 +259,10 @@ public class Menu
     {
         System.out.println("Starting gamemode 2!");
 
-        new GameMode2(graph).play();
+        GameMode2 gameMode2 = new GameMode2(graph);
+        gameMode2.play();
+        //new GameMode2(graph).play();
+
     }
 
 

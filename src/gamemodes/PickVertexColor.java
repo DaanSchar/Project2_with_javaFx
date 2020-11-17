@@ -105,10 +105,21 @@ public class PickVertexColor
     }
 
 
-    public void pickColor2(int color)
+    public void pickColorUp(int color)
     {
         this.color = color + 1;
         colorsObject.setColorOfVertex(vertex, this.color);
+    }
+
+    public void pickColorDown(int color)
+    {
+        if(color - 1 >= 0) {
+            this.color = color - 1;
+            colorsObject.setColorOfVertex(vertex, this.color);
+        }
+        else{
+            System.out.println("Please pick a different color.");
+        }
     }
 
 
