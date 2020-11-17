@@ -186,7 +186,6 @@ public class GraphicalMenu extends Application {
                 //  class' stage to the scene made in GraphViewScene
                 GraphViewScene graphViewScene = new GraphViewScene(MENU_CHOICES);
                 try {
-                    System.out.println(MENU_CHOICES.getEdges() + "eeeeeee");
                     graphViewScene.start(stage);
                 } catch (Exception e) {
                     e.printStackTrace();

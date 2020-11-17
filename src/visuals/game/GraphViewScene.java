@@ -29,7 +29,6 @@ public class GraphViewScene extends Application {
     {
         this.menuChoices = menuChoices;
         this.graph = menuChoices.getGraph();
-        System.out.println("brrrrrrrr"+graph.getM());
     }
 
     @Override
@@ -37,8 +36,10 @@ public class GraphViewScene extends Application {
         Translate translate = new Translate();
         translate.setX(100);
 
-        GraphView graphView = new GraphView();
-        graphView.startGraphView(graph, Main.windowSizeX,Main.windowSizeY);
+        GameMode2 graphView = new GameMode2(graph, Main.windowSizeX,Main.windowSizeY);
+
+        System.out.println("gamemode = " + menuChoices.getGameMode());
+
         root = graphView.getGroup();
 
         Pane layout = new Pane();
