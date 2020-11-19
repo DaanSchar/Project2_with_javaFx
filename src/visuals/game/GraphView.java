@@ -12,14 +12,17 @@ import graph.ColEdge;
 import graph.Colors;
 import graph.Graph;
 import graph.Vertex;
+import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
+import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -278,10 +281,6 @@ public class GraphView
         }
     }
 
-
-    /**
-     * sets the action of all buttons of the graph
-     */
     protected void setButtonAction()
     {
         //  loops because it needs these effects need to be applied to all buttons in the button list
@@ -290,55 +289,78 @@ public class GraphView
             //copies button i to a new button b
             Button b = buttonList[i];
 
-            //sets the action of the button
-            b.setOnAction(actionEvent ->
-            {
-                    buttonAction(b);
-            });
+            b.setOnMouseClicked(actionEvent ->
+                    {
+                        if(actionEvent.getButton() == MouseButton.PRIMARY)
+                        {
+                            System.out.println("this is button" + b.getText());
 
-        //returns the copied button with the added actionEvent to the button list
+                            //sets text to the text of the button, so text = 1 if button is 1
+                            textForButtonAction = Integer.parseInt(b.getText());
+
+                            //sets the vertex to be colored to text
+                            pick.setPickedVertex(textForButtonAction);
+
+                            //gets the current color of vertex and increases it by 1
+                            pick.pickColorUp(colors.getColorOfVertex(textForButtonAction));
+
+                            colors.printColorArray();
+
+                            //sets the color of the button to the associated color in the randColor list;
+                            b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
+
+
+                            //coloring the line red if 2 vertices have the same color.
+                            checkIfNeedWarning();
+                            for(int j = 0;j < m; j++)
+                            {
+                                //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                                if(needWarningList[j] == true)
+                                {
+                                    lineList[j].setStroke(Color.RED);
+                                }   else {
+                                    colorLine(j);
+                                }
+                            }
+                        }
+                        else if(actionEvent.getButton() == MouseButton.SECONDARY)
+                        {
+                            System.out.println("this is button" + b.getText());
+
+                            //sets text to the text of the button, so text = 1 if button is 1
+                            textForButtonAction = Integer.parseInt(b.getText());
+
+                            //sets the vertex to be colored to text
+                            pick.setPickedVertex(textForButtonAction);
+
+                            //gets the current color of vertex and decreases it by 1
+                            pick.pickColorDown(colors.getColorOfVertex(textForButtonAction));
+
+                            colors.printColorArray();
+
+                            //sets the color of the button to the associated color in the randColor list;
+                            b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
+
+
+                            //coloring the line red if 2 vertices have the same color.
+                            checkIfNeedWarning();
+                            for(int j = 0;j < m; j++)
+                            {
+                                //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                                if(needWarningList[j] == true)
+                                {
+                                    lineList[j].setStroke(Color.RED);
+                                }   else {
+                                    colorLine(j);
+                                }
+                            }
+                        }
+
+                        });
+
             buttonList[i] = b;
         }
     }
-
-    /**
-     * method containing the action on button click event
-     *
-     * @param b button we want to give these conditions to
-     */
-    protected void buttonAction(Button b)
-    {
-        System.out.println("this is button" + b.getText());
-
-        //sets text to the text of the button, so text = 1 if button is 1
-        textForButtonAction = Integer.parseInt(b.getText());
-
-        //sets the vertex to be colored to text
-        pick.setPickedVertex(textForButtonAction);
-
-        //gets the current color of vertex and increases it by 1
-        pick.pickColorUp(colors.getColorOfVertex(textForButtonAction));
-
-        colors.printColorArray();
-
-        //sets the color of the button to the associated color in the randColor list;
-        b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
-
-
-        //coloring the line red if 2 vertices have the same color.
-        checkIfNeedWarning();
-        for(int j = 0;j < m; j++)
-        {
-            //needWarningList represents if an edge contains 2 vertices that are the same color or not
-            if(needWarningList[j] == true)
-            {
-                lineList[j].setStroke(Color.RED);
-            }   else {
-                colorLine(j);
-            }
-        }
-    }
-
 
     public void checkIfNeedWarning()
     {

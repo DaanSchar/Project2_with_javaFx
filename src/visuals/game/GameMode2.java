@@ -14,20 +14,24 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import visuals.menu.GraphicalMenu;
+//import visuals.menu.EndMenu;
 
 import java.awt.event.MouseEvent;
 
 public class GameMode2 extends GraphView{
 
-    private static final int STARTTIME = 10; //import that from menu-choice
+    private static final int TIME = GraphicalMenu.getMenuChoice().getTime(); //import that from menu-choice
     private Timeline countdown;
     private Label countdownLabel = new Label();
     private Label textLabel = new Label();
     private Label resultLabel1 = new Label();
     private Label resultLabel2 = new Label();
     //enables binding of timeSeconds value to timerLabel text
-    private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+    private IntegerProperty timeSeconds = new SimpleIntegerProperty(TIME);
+    private Stage stage;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
@@ -62,9 +66,9 @@ public class GameMode2 extends GraphView{
         root.getChildren().add(timeBox);
 
         //make timeline to countdown
-        timeSeconds.set(STARTTIME);
+        timeSeconds.set(TIME);
         countdown = new Timeline();
-        countdown.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+        countdown.getKeyFrames().add(new KeyFrame(Duration.seconds(TIME + 1), new KeyValue(timeSeconds, 0)));
         countdown.playFromStart();
 
         //determines end of game (when countdown stops)
@@ -98,7 +102,6 @@ public class GameMode2 extends GraphView{
         //there appears to be a problem here: graph.colors.numberOfColors returns 1 even if no color
         //was selected
         System.out.println("You used " + graph.colors.numberOfColors() + " colors.");
-
     }
 
     protected void setHoverEvent()
@@ -121,27 +124,6 @@ public class GameMode2 extends GraphView{
                 hoverEventExited(b);
                 System.out.println("this hover exit event has been overwritten by gamemode 2");
             });
-        }
-    }
-
-
-    public void setButtonAction()
-    {
-        //  loops because it needs these effects need to be applied to all buttons in the button list
-        for(int i = 0; i < graph.getN(); i++)
-        {
-            //copies button i to a new button b
-            Button b = buttonList[i];
-
-            //sets the action of the button
-            b.setOnAction(actionEvent ->
-            {
-                buttonAction(b);
-                System.out.println("this button click event is being overwritten by gamemode 2");
-            });
-
-            //returns the copied button with the added actionEvent to the button list
-            buttonList[i] = b;
         }
     }
 }

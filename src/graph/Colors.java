@@ -86,7 +86,7 @@ public class Colors
                 {
                     break;
                 }
-            if (i == j)
+            if (i == j && colorArray[i] != 0)
             {
                 count++;
             }

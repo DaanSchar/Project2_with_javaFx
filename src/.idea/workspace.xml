@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97a7e4c9-5f78-49d6-94ab-ec6ab93e0487" name="Default Changelist" comment="" />
+    <list default="true" id="97a7e4c9-5f78-49d6-94ab-ec6ab93e0487" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1k1F60LHKPZRQd9zYM6CFDvmjej" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -15,7 +21,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -31,9 +37,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="23" width="1024" height="821" key="SettingsEditor" timestamp="1604860363392">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="0" y="23" width="1024" height="808" key="SettingsEditor" timestamp="1605738537423">
+      <screen x="0" y="23" width="1440" height="808" />
     </state>
+    <state x="0" y="23" width="1024" height="808" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1605738537423" />
     <state x="0" y="23" width="845" height="814" key="SettingsEditor/0.23.1440.814@0.23.1440.814" timestamp="1604860238076" />
     <state x="0" y="23" width="1024" height="821" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1604860363392" />
   </component>
