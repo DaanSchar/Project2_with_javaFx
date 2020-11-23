@@ -18,7 +18,6 @@ public class GameMode1 extends GraphView{
 
     public GameMode1(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
-        super.graph = graph;
         startTime = System.currentTimeMillis();
         System.out.println("running gamemode 1!");
     }

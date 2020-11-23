@@ -26,10 +26,12 @@ public class GraphicalMenu extends Application {
     private ColEdge[] e;
     private int n;
     private int m;
+    public static Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
 
+        this.stage = stage;
         // gamemode
         ChoiceBox<String> gameMode = new ChoiceBox<>(FXCollections.observableArrayList("To the end",
                 "Timed best attempt", "Random order coloring"));

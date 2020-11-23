@@ -33,7 +33,7 @@ public class GraphView
 {
 
     public Group root;
-    protected Graph graph;
+    private Graph graph;
     private PickVertexColor pick;
     private int windowSizeX;
     private int windowSizeY;
@@ -104,7 +104,6 @@ public class GraphView
         resBox.setPrefWidth(500);
         resBox.setLayoutX(15);
         resBox.setLayoutY(350);
-
 
         makeLineColorList();
         scaleButtons();

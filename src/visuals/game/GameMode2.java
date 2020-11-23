@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
 //import visuals.menu.EndMenu;
 
@@ -34,10 +35,11 @@ public class GameMode2 extends GraphView {
     private Stage stage;
     private long startTime;
     private long playTime;
+    private Graph graphh;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
-        super.graph = graph;
+        this.graphh = graph;
         setTimer();
         startTime = System.currentTimeMillis();
         System.out.println("running gamemode 2!");
@@ -77,7 +79,11 @@ public class GameMode2 extends GraphView {
             @Override
             public void handle(ActionEvent actionEvent) {
                 countdown.stop();
-                timeOut();
+                try {
+                    timeOut();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -88,11 +94,12 @@ public class GameMode2 extends GraphView {
      *
      */
 
-    public void timeOut() {
+    public void timeOut() throws Exception {
         //add resultLabel1
+
         resultLabel1.setText("TIME OVER.");
         resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("You used " + graph.colors.numberOfColors() + " colors.");
+        resultLabel2.setText("You used " + graphh.colors.numberOfColors() + " colors.");
         resultLabel2.setTextFill(Color.BLACK);
 
         //add resBox containing resultLabels
@@ -103,6 +110,11 @@ public class GameMode2 extends GraphView {
         resBox.setLayoutY(550);
 
         root.getChildren().add(resBox);
+
+        System.out.println(graphh.getM() + "woa");
+        EndMenu endMenu = new EndMenu(stage, graphh);
+        GraphicalMenu.stage.setScene(endMenu.getEndMenuScene());
+
     }
 
     /**
