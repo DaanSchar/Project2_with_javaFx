@@ -33,13 +33,15 @@ public class GameMode1 extends GraphView{
         //add resultLabel1
         resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
         resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("It took you: " + playTime + " seconds to complete");
+        resultLabel2.setText("The chromatic number for this graph is " + graph.getChromNum());
         resultLabel2.setTextFill(Color.BLACK);
+        resultLabel3.setText("It took you: " + playTime + " seconds to complete");
+        resultLabel3.setTextFill(Color.BLACK);
 
         //add resBox containing resultLabels
         VBox resBox = new VBox(20);
         resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2, resultLabel3);
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);

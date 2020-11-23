@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 /*public class EndMenu extends Application {
 
     private Scene endMenuScene;
-    private Label resultLabel1;
-    private Label resultLabel2;
+    private Label resultLabel1 = new Label();
+    private Label resultLabel2 = new Label();
     private Graph graph;
 
     public EndMenu()
@@ -50,11 +50,7 @@ import javafx.stage.Stage;
 
         endMenuScene = new Scene(layout, Main.windowSizeX, Main.windowSizeY);
 
-    }
+    }Ü
 
-    public Scene getEndMenuScene()
-    {
-        return endMenuScene;
-    }
 
 }*/

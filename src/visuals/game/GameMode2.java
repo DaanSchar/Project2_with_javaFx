@@ -29,6 +29,7 @@ public class GameMode2 extends GraphView {
     private Label textLabel = new Label();
     private Label resultLabel1 = new Label();
     private Label resultLabel2 = new Label();
+    private Label resultLabel3 = new Label();
     //enables binding of timeSeconds value to timerLabel text
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(TIME);
     private Stage stage;
@@ -94,11 +95,13 @@ public class GameMode2 extends GraphView {
         resultLabel1.setTextFill(Color.BLACK);
         resultLabel2.setText("You used " + graph.colors.numberOfColors() + " colors.");
         resultLabel2.setTextFill(Color.BLACK);
+        resultLabel3.setText("The chromatic number for this graph is " + graph.getChromNum());
+        resultLabel3.setTextFill(Color.BLACK);
 
         //add resBox containing resultLabels
         VBox resBox = new VBox(20);
         resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1, resultLabel2);
+        resBox.getChildren().addAll(resultLabel1, resultLabel2, resultLabel3);
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
 
@@ -116,13 +119,15 @@ public class GameMode2 extends GraphView {
         //add resultLabel1
         resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
         resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("It took you: " + playTime + " seconds to complete");
-        resultLabel2.setTextFill(Color.BLACK);
+        resultLabel2.setText("The chromatic number for this graph is " + graph.getChromNum());
+        resultLabel3.setTextFill(Color.BLACK);
+        resultLabel3.setText("It took you: " + playTime + " seconds to complete");
+        resultLabel3.setTextFill(Color.BLACK);
 
         //add resBox containing resultLabels
         VBox resBox = new VBox(20);
         resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1, resultLabel2);
+        resBox.getChildren().addAll(resultLabel1, resultLabel2, resultLabel3);
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);
