@@ -44,6 +44,7 @@ public class GameMode2 extends GraphView {
         setTimer();
         startTime = System.currentTimeMillis();
         System.out.println("running gamemode 2!");
+        stage = GraphicalMenu.stage;
     }
 
     /**

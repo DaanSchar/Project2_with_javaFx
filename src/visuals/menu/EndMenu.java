@@ -1,4 +1,4 @@
-/*package visuals.menu;
+package visuals.menu;
 
 import Main.Main;
 import graph.Graph;
@@ -15,23 +15,30 @@ import javafx.stage.Stage;
  *
  */
 
-/*public class EndMenu extends Application {
+public class EndMenu extends Application {
 
     private Scene endMenuScene;
     private Label resultLabel1;
     private Label resultLabel2;
     private Graph graph;
+    private Stage stage;
 
-    public EndMenu()
+    public EndMenu(Stage stage, Graph graph)
     {
-
+        this.graph = graph;
+        this.stage = stage;
+        start(stage);
 
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
 
         //add resultLabel1
+
+        resultLabel1 = new Label();
+        resultLabel2 = new Label();
+
         resultLabel1.setText("This is the end of the game.");
         resultLabel1.setTextFill(Color.BLACK);
         resultLabel2.setText("You used " + graph.colors.numberOfColors()  + " colors.");
@@ -57,4 +64,4 @@ import javafx.stage.Stage;
         return endMenuScene;
     }
 
-}*/
+}
