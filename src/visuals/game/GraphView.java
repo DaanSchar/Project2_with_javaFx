@@ -15,8 +15,10 @@ import graph.Vertex;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -61,6 +63,10 @@ public class GraphView
     private double buttonScaler;
     private double lineScaler;
     private Text currentVertex;
+    private Button checkButton;
+    private VBox resBox;
+    private Label resultLabel1;
+    private Label resultLabel2;
 
 
     /**
@@ -92,6 +98,14 @@ public class GraphView
         needWarningList = new Boolean[m];
         vertexCount = 0;
 
+        resultLabel1 = new Label();
+        resultLabel2 = new Label();
+        resBox = new VBox(20);
+        resBox.setPrefWidth(500);
+        resBox.setLayoutX(15);
+        resBox.setLayoutY(350);
+
+
         makeLineColorList();
         scaleButtons();
         scaleLines();
@@ -101,6 +115,82 @@ public class GraphView
         makeRandomColorList();
         setHoverEvent();
         setButtonAction();
+        makeCheckButton();
+        root.getChildren().add(resBox);
+        resultLabel1.setTextFill(Color.BLACK);
+        resultLabel2.setTextFill(Color.BLACK);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2);
+    }
+
+    /**
+     * makes button for simple hint
+     *
+     */
+
+    public void makeCheckButton() {
+        Button checkButton = new Button();
+        checkButton.setText("Want a hint?");
+        checkButton.setTranslateX(50);
+        checkButton.setTranslateY(200);
+
+        checkButton.setOnAction(actionEvent ->
+        {
+            check();
+        });
+
+        root.getChildren().add(checkButton);
+    }
+
+
+    /**
+     * a very simple hint function
+     *
+     */
+
+    public void check()
+    {
+        if (colors.getColoredVert() < graph.getN())
+        {
+            int remaining = graph.getN() - colors.getColoredVert();
+            resultLabel1.setText("You coloured " + colors.getColoredVert() + " vertices.");
+            resultLabel2.setText(remaining + " vertices to go!");
+        }
+        else if(colors.getColoredVert() == graph.getN())
+        {
+            if(graph.colors.numberOfColors() != graph.getChromNum())
+            {
+                resultLabel1.setText("You colored all vertices - but did not reach the chromatic number.");
+                resultLabel2.setText("You can do better!");
+            }
+            else if(graph.colors.numberOfColors() == graph.getChromNum())
+            {
+                resultLabel1.setText("You reached the chromatic number.");
+                resultLabel2.setText("You are a motherfucking smartass graph coloring hero!");
+                end();
+            }
+        }
+    }
+
+    /**
+     * checks after each playmove whether chromNum is reached, if so starts endMenu
+     *
+     */
+    public void autoCheck()
+    {
+        if (colors.getColoredVert() == graph.getN() && graph.colors.numberOfColors() == graph.getChromNum())
+        {
+            end();
+        }
+    }
+
+    /**
+     * end method (gets overridden by individual gamemodes - this one is actually not used!
+     *
+     */
+    public void end()
+    {
+        resultLabel1.setText("This is the end.");
+        resultLabel2.setText("My friend!");
     }
 
     /**
@@ -322,6 +412,7 @@ public class GraphView
                                     colorLine(j);
                                 }
                             }
+                            autoCheck(); //performs auto-check after each move
                         }
                         else if(actionEvent.getButton() == MouseButton.SECONDARY)
                         {
@@ -354,6 +445,7 @@ public class GraphView
                                     colorLine(j);
                                 }
                             }
+                            autoCheck(); //performs auto-check after each move
                         }
 
                         });

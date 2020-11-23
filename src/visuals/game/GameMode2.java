@@ -21,9 +21,9 @@ import visuals.menu.GraphicalMenu;
 
 import java.awt.event.MouseEvent;
 
-public class GameMode2 extends GraphView{
+public class GameMode2 extends GraphView {
 
-    private static final int TIME = GraphicalMenu.getMenuChoice().getTime(); //import that from menu-choice
+    private static final int TIME = GraphicalMenu.getMenuChoice().getTime();
     private Timeline countdown;
     private Label countdownLabel = new Label();
     private Label textLabel = new Label();
@@ -32,21 +32,22 @@ public class GameMode2 extends GraphView{
     //enables binding of timeSeconds value to timerLabel text
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(TIME);
     private Stage stage;
+    private long startTime;
+    private long playTime;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
         super.graph = graph;
         setTimer();
+        startTime = System.currentTimeMillis();
         System.out.println("running gamemode 2!");
     }
 
     /**
      * sets up the timer
-     *
      */
 
-    public void setTimer()
-    {
+    public void setTimer() {
         //add label displaying countdown
         countdownLabel.textProperty().bind(timeSeconds.asString());
         countdownLabel.setTextFill(Color.BLACK);
@@ -76,15 +77,20 @@ public class GameMode2 extends GraphView{
             @Override
             public void handle(ActionEvent actionEvent) {
                 countdown.stop();
-                end();
+                timeOut();
             }
         });
     }
 
-    public void end()
-    {
+    /**
+     * when time is over before chromNum is reached
+     * returns: number of colors used
+     *
+     */
+
+    public void timeOut() {
         //add resultLabel1
-        resultLabel1.setText("This is the end of the game.");
+        resultLabel1.setText("TIME OVER.");
         resultLabel1.setTextFill(Color.BLACK);
         resultLabel2.setText("You used " + graph.colors.numberOfColors() + " colors.");
         resultLabel2.setTextFill(Color.BLACK);
@@ -92,38 +98,34 @@ public class GameMode2 extends GraphView{
         //add resBox containing resultLabels
         VBox resBox = new VBox(20);
         resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2);
+        resBox.getChildren().addAll(resultLabel1, resultLabel2);
         resBox.setLayoutX(15);
-        resBox.setLayoutY(350);
+        resBox.setLayoutY(550);
 
         root.getChildren().add(resBox);
-
-        System.out.println("This is the end of the game");
-        //there appears to be a problem here: graph.colors.numberOfColors returns 1 even if no color
-        //was selected
-        System.out.println("You used " + graph.colors.numberOfColors() + " colors.");
     }
 
-    protected void setHoverEvent()
-    {
-        //  loops because it needs these effects need to be applied to all buttons in the button list
-        for(int i = 0; i < graph.getN(); i++)
-        {
-            Button b = buttonList[i];
+    /**
+     * when chromNum is reached before time is out
+     * returns: time needed to complete
+     */
 
-            //  action taken when entering the button
-            b.setOnMouseEntered(e ->
-            {
-                hoverEventEntered(b);
-                System.out.println("this hover enter event has been overwritten by gamemode 2");
-            });
+    @Override
+    public void end() {
+        playTime = (System.currentTimeMillis() - startTime) / 1000;
+        //add resultLabel1
+        resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
+        resultLabel1.setTextFill(Color.BLACK);
+        resultLabel2.setText("It took you: " + playTime + " seconds to complete");
+        resultLabel2.setTextFill(Color.BLACK);
 
-            //  action taken when exiting the button
-            b.setOnMouseExited(e ->
-            {
-                hoverEventExited(b);
-                System.out.println("this hover exit event has been overwritten by gamemode 2");
-            });
-        }
+        //add resBox containing resultLabels
+        VBox resBox = new VBox(20);
+        resBox.setPrefWidth(500);
+        resBox.getChildren().addAll(resultLabel1, resultLabel2);
+        resBox.setLayoutX(15);
+        resBox.setLayoutY(550);
+        root.getChildren().add(resBox);
     }
 }
+

@@ -1,5 +1,7 @@
 package graph;
 
+
+
 /**
  * this class stores the color of each vertex of the graph inside colorArray[]
  *
@@ -11,6 +13,8 @@ public class Colors
 
     private int n;
     private int colorArray[];
+
+
 
     public Colors(int totalVertices)
     {
@@ -25,6 +29,23 @@ public class Colors
         }
     }
 
+    /**
+     * returns how many vertices have been colored already - useful as hint and to determine end of gamemode1
+     */
+
+    public int getColoredVert()
+    {
+        int count = 0;
+        for(int i = 0; i < colorArray.length; i++)
+        {
+            if(colorArray[i] == 0)
+            {
+                count++;
+            }
+        }
+        int coloredVert = colorArray.length - count;
+        return coloredVert;
+    }
 
     /** returns the color of vertex
      *
@@ -56,7 +77,6 @@ public class Colors
     {
         return colorArray;
     }
-
 
     /**
      * prints out colorArray

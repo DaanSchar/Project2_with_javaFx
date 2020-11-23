@@ -1,5 +1,6 @@
 package graph;
 
+import chromatics.branching.Branching;
 import menu.Menu;
 import visuals.menu.GraphicalMenu;
 
@@ -15,6 +16,8 @@ public class Graph
     public int m;
     public ColEdge[] e;
     public Colors colors;
+    public int chromNum;
+    private static int calc = 250;
 
     /**
      * retrieves information for the graph from the menu.Menu class
@@ -26,6 +29,10 @@ public class Graph
         e = GraphicalMenu.getMenuChoice().getE();
         colors = new Colors(n);
         System.out.println("n = " + n);
+
+        //get the chromNum in the graph object - making it easier to retrieve at a later point
+        Branching branching = new Branching(this, calc);
+        chromNum = branching.getBranchingNum();
     }
 
     /**
@@ -47,6 +54,11 @@ public class Graph
     public int getM()
     {
         return m;
+    }
+
+    public int getChromNum()
+    {
+        return chromNum;
     }
 
     public ColEdge[] getE()
