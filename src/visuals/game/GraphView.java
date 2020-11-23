@@ -159,7 +159,7 @@ public class GraphView
             if(graph.colors.numberOfColors() != graph.getChromNum())
             {
                 resultLabel1.setText("You colored all vertices - but did not reach the chromatic number.");
-                resultLabel2.setText("You can do better!");
+                resultLabel2.setText("You used " + colors.numberOfColors() + " colors. The chromatic number for this graph is " + graph.getChromNum());
             }
             else if(graph.colors.numberOfColors() == graph.getChromNum())
             {
@@ -176,7 +176,7 @@ public class GraphView
      */
     public void autoCheck()
     {
-        if (colors.getColoredVert() == graph.getN() && graph.colors.numberOfColors() == graph.getChromNum())
+        if (colors.getColoredVert() == graph.getN() && graph.colors.numberOfColors() == graph.getChromNum() && checkIfNeedWarning() == false)
         {
             end();
         }
@@ -453,17 +453,19 @@ public class GraphView
         }
     }
 
-    public void checkIfNeedWarning()
+    public boolean checkIfNeedWarning()
     {
         for(int i = 0; i < m; i++)
         {
             if( (colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0)  )
             {
                 needWarningList[i] = true;
+                return true;
             }   else {
                 needWarningList[i] = false;
                 }
         }
+        return false;
     }
 
 

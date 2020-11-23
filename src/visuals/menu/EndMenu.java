@@ -1,4 +1,4 @@
-package visuals.menu;
+/*package visuals.menu;
 
 import Main.Main;
 import graph.Graph;
@@ -15,34 +15,26 @@ import javafx.stage.Stage;
  *
  */
 
-public class EndMenu extends Application {
+/*public class EndMenu extends Application {
 
-    private static Scene endMenuScene;
+    private Scene endMenuScene;
     private Label resultLabel1;
     private Label resultLabel2;
     private Graph graph;
-    private static Stage stage;
 
-    public EndMenu(Stage stage, Graph graph) {
-        this.stage = stage;
-        this.graph = graph;
-        start(stage);
-        System.out.println("heey" + this.graph.getM());
+    public EndMenu()
+    {
+
+
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
 
         //add resultLabel1
-
-        resultLabel1 = new Label();
-        resultLabel2 = new Label();
-
-        System.out.println(graph.getM());
-
         resultLabel1.setText("This is the end of the game.");
         resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("You used " + graph.getColor().numberOfColors()  + " colors.");
+        resultLabel2.setText("You used " + graph.colors.numberOfColors()  + " colors.");
         resultLabel2.setTextFill(Color.BLACK);
 
         //add resBox containing resultLabels
@@ -60,11 +52,9 @@ public class EndMenu extends Application {
 
     }
 
-
-
     public Scene getEndMenuScene()
     {
         return endMenuScene;
     }
 
-}
+}*/
