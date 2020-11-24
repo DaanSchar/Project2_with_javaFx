@@ -7,8 +7,8 @@ public class Vertex
 {
 
     private ColEdge[] e;
-    private int[] connectedVerticesArray;
-    private int[] convertedConnectedVerticesArray;
+    public int[] connectedVerticesArray;
+    public int[] convertedConnectedVerticesArray;
     private int n;
     private Graph graph;
 

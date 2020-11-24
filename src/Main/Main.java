@@ -20,6 +20,8 @@ public class Main extends Application
     static final int r = 15;
     public static final int windowSizeX = 1000;
     public static final int windowSizeY = 800;
+    public static final int endgamewindowSizeX = 400;
+    public static final int endgamewindowSizeY = 350;
     public static Group root;
 
 

@@ -23,7 +23,7 @@ public class GraphViewScene extends Application {
 
     private Scene graphViewScene;
     private Graph graph;
-    private GraphicalMenu.MenuChoices menuChoices;
+    private static GraphicalMenu.MenuChoices menuChoices;
     private Group root;
 
     public GraphViewScene(GraphicalMenu.MenuChoices menuChoices)
@@ -77,6 +77,10 @@ public class GraphViewScene extends Application {
         }
         stage.setScene(endMenu.getEndMenuScene());*/
 
+    }
+    public static GraphicalMenu.MenuChoices setMenuChoices()
+    {
+        return menuChoices;
     }
 
 
