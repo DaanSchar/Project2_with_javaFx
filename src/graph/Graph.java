@@ -71,4 +71,9 @@ public class Graph
         return colors;
     }
 
+    public void resetColor()
+    {
+        colors = new Colors(n);
+    }
+
 }
