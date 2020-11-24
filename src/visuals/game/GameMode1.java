@@ -2,9 +2,11 @@ package visuals.game;
 
 
 import graph.Graph;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import visuals.menu.EndMenu;
 
 
 public class GameMode1 extends GraphView{
@@ -15,11 +17,14 @@ public class GameMode1 extends GraphView{
     private Label resultLabel1 = new Label();
     private Label resultLabel2 = new Label();
     private Label resultLabel3 = new Label();
+    private Graph graph;
 
     public GameMode1(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
+        this.graph = graph;
         startTime = System.currentTimeMillis();
         System.out.println("running gamemode 1!");
+
     }
 
     /**
@@ -44,5 +49,9 @@ public class GameMode1 extends GraphView{
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);
+
+        Button b = new Button();
+        b.setText("Try again");
+
     }
 }

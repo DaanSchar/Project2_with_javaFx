@@ -33,40 +33,41 @@ public class GraphView
 {
 
     public Group root;
-    private Graph graph;
-    private PickVertexColor pick;
+    protected Graph graph;
+    protected PickVertexColor pick;
     private int windowSizeX;
     private int windowSizeY;
-    private Colors colors;
-    private int textForButtonAction;
-    private int textForButtonHover;
+    protected Colors colors;
+    protected int textForButtonAction;
+    protected int textForButtonHover;
     private Coordinate[] positions;
     private Grid grid;
     private ColEdge[] e;
-    private int n;
-    private int m;
+    protected int n;
+    protected int m;
 
-    private int[] connectedVertices;
-    private String[] lineColorList;
-    private int lineCount;
-    private Line[] lineList;
-    private Boolean[] needWarningList;
+    protected int[] connectedVertices;
+    protected String[] lineColorList;
+    protected int lineCount;
+    protected Line[] lineList;
+    protected Boolean[] needWarningList;
 
-    private Circle[] circles;
-    private Circle[] circles2;
+    protected Circle[] circles;
+    protected Circle[] circles2;
 
-    private int vertexCount;
-    public Button button;
+    protected int vertexCount;
+    protected Button button;
     protected Button[] buttonList;
-    private String[] randColors;
-    private Vertex vertex;
-    private double buttonScaler;
-    private double lineScaler;
-    private Text currentVertex;
-    private Button checkButton;
-    private VBox resBox;
-    private Label resultLabel1;
-    private Label resultLabel2;
+    protected String[] randColors;
+    protected Vertex vertex;
+    protected double buttonScaler;
+    protected double lineScaler;
+    protected Text currentVertex;
+    protected Button checkButton;
+    protected VBox resBox;
+    protected Label resultLabel1;
+    protected Label resultLabel2;
+    private Label resultLabel3;
 
 
     /**
@@ -522,7 +523,7 @@ public class GraphView
     /**
      * initializes circles[] and circles2[]
      */
-    private void initCircles()
+    protected void initCircles()
     {
         for(int i = 0; i < circles.length; i++)
         {

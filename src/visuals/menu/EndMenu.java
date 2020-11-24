@@ -3,12 +3,21 @@ package visuals.menu;
 import Main.Main;
 import graph.Graph;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import visuals.game.GameMode1;
+import visuals.game.GameMode2;
+import visuals.game.GraphView;
+import visuals.game.GraphViewScene;
+
+import java.awt.event.ActionEvent;
 
 /**
  * displays results and asks user for the next steps
@@ -20,13 +29,18 @@ public class EndMenu extends Application {
     private Scene endMenuScene;
     private Label resultLabel1;
     private Label resultLabel2;
+    private Label resultLabel3;
+    private Label resultLabel4;
     private Graph graph;
     private Stage stage;
+    private long playTime;
+    private GraphicalMenu.MenuChoices MENU_CHOICES;
 
     public EndMenu(Stage stage, Graph graph)
     {
         this.graph = graph;
         this.stage = stage;
+        MENU_CHOICES = GraphViewScene.setMenuChoices();
         start(stage);
 
     }
@@ -38,25 +52,77 @@ public class EndMenu extends Application {
 
         resultLabel1 = new Label();
         resultLabel2 = new Label();
+        resultLabel3 = new Label();
+        resultLabel4 = new Label();
+        Button tryAgain = new Button();
+        Button mainMenu = new Button();
+        Button exit = new Button();
 
-        resultLabel1.setText("This is the end of the game.");
-        resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("You used " + graph.colors.numberOfColors()  + " colors.");
-        resultLabel2.setTextFill(Color.BLACK);
+        resultLabel1.setText("Game Over");
+        resultLabel1.setTextFill(Color.WHITE);
+
+        resultLabel2.setText("You used " + graph.colors.numberOfColors()  + " Colors");
+        resultLabel2.setTextFill(Color.WHITE);
+
+        resultLabel3.setText("The Chromatic Number is " + graph.getChromNum());
+        resultLabel3.setTextFill(Color.WHITE);
+
+        resultLabel4.setText("You took  " + playTime + " Seconds");
+        resultLabel4.setTextFill(Color.WHITE);
+
+        //Buttons in End Menu
+
+        tryAgain.setText("Try Again");
+        tryAgain.setTextFill(Color.BLACK);
+        tryAgain.setOnAction(e -> rerunProgram());
+        mainMenu.setText("Back to Main Menu");
+        mainMenu.setTextFill(Color.BLACK);
+        mainMenu.setOnAction(e -> goToMainMenu());
+        exit.setText("Exit Game");
+        exit.setTextFill(Color.BLACK);
+        exit.setOnAction(e -> Platform.exit());
 
         //add resBox containing resultLabels
         VBox resBox = new VBox(20);
         resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4,tryAgain,mainMenu,exit);
         resBox.setLayoutX(15);
-        resBox.setLayoutY(350);
+        resBox.setLayoutY(35);
 
         Pane layout = new Pane();
         layout.getChildren().add(resBox);
         layout.setBackground(new Background(new BackgroundFill(Color.web("#282828"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        endMenuScene = new Scene(layout, Main.windowSizeX, Main.windowSizeY);
+        endMenuScene = new Scene(layout, Main.endgamewindowSizeX, Main.endgamewindowSizeY);
 
+    }
+    private void exitProgram()
+    {
+        System.out.println("Goodbye!");
+        //  endMenuScene.close();
+    }
+    private void goToMainMenu()
+    {
+        System.out.println("Going to Main Menu!");
+        GraphicalMenu menu = new GraphicalMenu();
+        try {
+            menu.start(stage);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        stage.setScene(menu.getMenuScene());
+    }
+
+    private void rerunProgram()
+    {
+        System.out.println("Rerunning");
+        GraphViewScene graphViewScene = new GraphViewScene(MENU_CHOICES);
+        try {
+            graphViewScene.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        stage.setScene(graphViewScene.getGraphViewScene());
     }
 
     public Scene getEndMenuScene()

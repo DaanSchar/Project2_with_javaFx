@@ -36,11 +36,11 @@ public class GameMode2 extends GraphView {
     private Stage stage;
     private long startTime;
     private long playTime;
-    private Graph graphh;
+    private Graph graph;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
-        this.graphh = graph;
+        this.graph = graph;
         setTimer();
         startTime = System.currentTimeMillis();
         System.out.println("running gamemode 2!");
@@ -101,7 +101,7 @@ public class GameMode2 extends GraphView {
 
         resultLabel1.setText("TIME OVER.");
         resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setText("You used " + graphh.colors.numberOfColors() + " colors.");
+        resultLabel2.setText("You used " + graph.colors.numberOfColors() + " colors.");
         resultLabel2.setTextFill(Color.BLACK);
         resultLabel3.setText("The chromatic number for this graph is " + graph.getChromNum());
         resultLabel3.setTextFill(Color.BLACK);
@@ -115,9 +115,8 @@ public class GameMode2 extends GraphView {
 
         root.getChildren().add(resBox);
 
-        System.out.println(graphh.getM() + "woa");
-        EndMenu endMenu = new EndMenu(stage, graphh);
-        GraphicalMenu.stage.setScene(endMenu.getEndMenuScene());
+        EndMenu endMenu = new EndMenu(stage, graph);
+        stage.setScene(endMenu.getEndMenuScene());
 
     }
 
