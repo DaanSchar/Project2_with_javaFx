@@ -9,6 +9,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import visuals.menu.EndMenu;
+import visuals.menu.GraphicalMenu;
+
 import java.util.Arrays;
 
 public class GameMode3 extends GraphView{
@@ -22,6 +26,7 @@ public class GameMode3 extends GraphView{
     private long playTime;
     private Label resultLabel3 = new Label();
     private int totalVertices;
+    private Stage stage;
 
 
     public GameMode3(Graph graph, int windowSizeX, int windowSizeY) {
@@ -31,6 +36,7 @@ public class GameMode3 extends GraphView{
         vertex = vertex;
         start();
         System.out.println(graph.n);
+        stage = GraphicalMenu.stage;
     }
 
     public void start()
@@ -101,25 +107,66 @@ public class GameMode3 extends GraphView{
                 }
                 confirmButton(b);
             }
-        });
+
+        else if(actionEvent.getButton() == MouseButton.SECONDARY)
+        {
+            System.out.println("this is button" + b.getText());
+
+            //sets text to the text of the button, so text = 1 if button is 1
+            textForButtonAction = Integer.parseInt(b.getText());
+
+            //sets the vertex to be colored to text
+            pick.setPickedVertex(textForButtonAction);
+
+            //gets the current color of vertex and increases it by 1
+            pick.pickColorDown(colors.getColorOfVertex(textForButtonAction));
+
+            colors.printColorArray();
+
+            //sets the color of the button to the associated color in the randColor list;
+            b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
+
+
+            //coloring the line red if 2 vertices have the same color.
+            checkIfNeedWarning();
+            for(int j = 0;j < m; j++)
+            {
+                //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                if(needWarningList[j] == true)
+                {
+                    lineList[j].setStroke(Color.RED);
+                }   else {
+                    colorLine(j);
+                }
+            }
+            confirmButton(b);
+        }
+    });
     }
 
     /**
-     * asks player to confirm color choice
+     * makes confirmation button asking player to confirm color choice
      */
 
     public void confirmButton(Button b)
     {
         Button confirm = new Button();
-        root.getChildren().add(confirm);
         confirm.setText("Confirm?");
         //set position close to vertex being colored
+        confirm.setTranslateX(15);
+        confirm.setTranslateY(450);
+        root.getChildren().add(confirm);
+
         confirm.setOnAction(actionEvent ->
         {
             confirm(b);
         });
     }
 
+    /**
+     * sets confirmation when confirmButton is clicked
+     * @param b the vertex - button that is being colored
+     */
     public void confirm(Button b) {
         if(move < graph.n - 1)
         {
@@ -136,7 +183,7 @@ public class GameMode3 extends GraphView{
     }
 
     /**
-     * @Override setHoverEvent
+     * @Override setHoverEvent from graphView
      */
     @Override
     public void setHoverEvent()
@@ -144,6 +191,11 @@ public class GameMode3 extends GraphView{
         System.out.println("setHoverEvent has been overwritten by GameMode3");
     }
 
+    @Override
+    public void setButtonAction()
+    {
+        System.out.println("setButtonAction has been overwritten by GameMode3");
+    }
 
     /**
      * shows next button to be colored
@@ -159,11 +211,6 @@ public class GameMode3 extends GraphView{
         b.setScaleY(buttonScaler * 2.5);
 
         textForButtonHover = Integer.parseInt(b.getText());
-        //connectedVertices = vertex.getConnVerArray(textForButtonHover);
-
-        //circles = new Circle[connectedVertices.length];
-        //circles2 = new Circle[connectedVertices.length];
-        //initCircles();
 
         currentVertex = new Text();
         currentVertex.setText(b.getText());
@@ -171,27 +218,6 @@ public class GameMode3 extends GraphView{
         currentVertex.setX(95);
         currentVertex.setFill(Color.WHITE);
         root.getChildren().add(currentVertex);
-
-        /*for(int j = 0; j < connectedVertices.length; j++)
-        {
-            //scales the buttons adjacent to the vertex by 1.25
-            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
-            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
-
-            Coordinate cord = new Coordinate();
-            cord.x = (int)buttonList[connectedVertices[j]-1].getLayoutX();
-            cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
-
-            //draws a shape on each adjacent vertex
-            circles[j] = new Circle(cord.x, cord.y, 5);
-            circles[j].setFill(Color.WHITE);
-            root.getChildren().add(circles[j]);
-
-            //makes a a border around the circle(by making a smaller circle inside the existing circle)
-            circles2[j] = new Circle(cord.x, cord.y, 4);
-            circles2[j].setFill(Color.RED);
-            root.getChildren().add(circles2[j]);
-        }*/
     }
 
     /**
@@ -210,17 +236,6 @@ public class GameMode3 extends GraphView{
 
         //removes the text
         root.getChildren().remove(currentVertex);
-
-        /*//sets the size of all connected buttons back to the default size
-        for(int j = 0; j < connectedVertices.length; j++)
-        {
-            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
-            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
-
-            //removes the shapes drawn on the adjacent vertices from root
-            root.getChildren().remove(circles[j]);
-            root.getChildren().remove(circles2[j]);
-        }*/
     }
 
     /**
@@ -236,7 +251,7 @@ public class GameMode3 extends GraphView{
         {
             resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
             resultLabel1.setTextFill(Color.BLACK);
-            resultLabel2.setText("The chromatic number for this graph is " + graph.getChromNum() + "You used " + colors.numberOfColors() + " colors.");
+            resultLabel2.setText("The chromatic number for this graph is " + graph.getChromNum() + ". You used " + colors.numberOfColors() + " colors.");
             resultLabel2.setTextFill(Color.BLACK);
             resultLabel3.setText("It took you: " + playTime + " seconds to complete");
             resultLabel3.setTextFill(Color.BLACK);
@@ -259,6 +274,9 @@ public class GameMode3 extends GraphView{
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);
+
+        EndMenu endMenu = new EndMenu(stage, graph);
+        stage.setScene(endMenu.getEndMenuScene());
     }
 
 

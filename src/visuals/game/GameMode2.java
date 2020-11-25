@@ -143,6 +143,9 @@ public class GameMode2 extends GraphView {
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);
+
+        EndMenu endMenu = new EndMenu(stage, graph);
+        stage.setScene(endMenu.getEndMenuScene());
     }
 }
 
