@@ -12,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import visuals.game.GameMode1;
-import visuals.game.GameMode2;
-import visuals.game.GraphView;
-import visuals.game.GraphViewScene;
+import visuals.game.*;
 
 import java.awt.event.ActionEvent;
 
@@ -33,13 +30,14 @@ public class EndMenu extends Application {
     private Label resultLabel4;
     private Graph graph;
     private Stage stage;
-    private long playTime;
+    private Results results;
     private GraphicalMenu.MenuChoices MENU_CHOICES;
 
-    public EndMenu(Stage stage, Graph graph)
+    public EndMenu(Stage stage, Graph graph, Results results)
     {
         this.graph = graph;
         this.stage = stage;
+        this.results = results;
         MENU_CHOICES = GraphViewScene.setMenuChoices();
         start(stage);
 
@@ -61,13 +59,13 @@ public class EndMenu extends Application {
         resultLabel1.setText("Game Over");
         resultLabel1.setTextFill(Color.WHITE);
 
-        resultLabel2.setText("You used " + graph.colors.numberOfColors()  + " Colors");
+        resultLabel2.setText("You used " + results.getNumberOfColors() + " Colors");
         resultLabel2.setTextFill(Color.WHITE);
 
-        resultLabel3.setText("The Chromatic Number is " + graph.getChromNum());
+        resultLabel3.setText("The Chromatic Number is " + results.getChromNum());
         resultLabel3.setTextFill(Color.WHITE);
 
-        resultLabel4.setText("You took  " + playTime + " Seconds");
+        resultLabel4.setText("You took  " + results.getPlayTime() + " Seconds");
         resultLabel4.setTextFill(Color.WHITE);
 
         //Buttons in End Menu

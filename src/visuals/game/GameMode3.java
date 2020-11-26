@@ -27,6 +27,7 @@ public class GameMode3 extends GraphView{
     private Label resultLabel3 = new Label();
     private int totalVertices;
     private Stage stage;
+    private Results results;
 
 
     public GameMode3(Graph graph, int windowSizeX, int windowSizeY) {
@@ -245,9 +246,17 @@ public class GameMode3 extends GraphView{
     public void end()
     {
         playTime = (System.currentTimeMillis() - startTime) / 1000;
-        //add resultLabel1
 
-        if(colors.numberOfColors() == graph.getChromNum())
+        //make results object
+        Results results = new Results(colors.numberOfColors(), graph.getChromNum(), playTime);
+
+        //call endMenu
+        EndMenu endMenu = new EndMenu(stage, graph, results);
+        stage.setScene(endMenu.getEndMenuScene());
+
+
+
+        /*if(colors.numberOfColors() == graph.getChromNum())
         {
             resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
             resultLabel1.setTextFill(Color.BLACK);
@@ -273,11 +282,7 @@ public class GameMode3 extends GraphView{
         resBox.getChildren().addAll(resultLabel1,resultLabel2, resultLabel3);
         resBox.setLayoutX(15);
         resBox.setLayoutY(550);
-        root.getChildren().add(resBox);
-
-        EndMenu endMenu = new EndMenu(stage, graph);
-        stage.setScene(endMenu.getEndMenuScene());
+        root.getChildren().add(resBox);*/
     }
-
 
 }

@@ -37,6 +37,7 @@ public class GameMode2 extends GraphView {
     private long startTime;
     private long playTime;
     private Graph graph;
+    private Results results;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
@@ -97,7 +98,6 @@ public class GameMode2 extends GraphView {
      */
 
     public void timeOut() throws Exception {
-        //add resultLabel1
 
         resultLabel1.setText("TIME OVER.");
         resultLabel1.setTextFill(Color.BLACK);
@@ -115,7 +115,11 @@ public class GameMode2 extends GraphView {
 
         root.getChildren().add(resBox);
 
-        EndMenu endMenu = new EndMenu(stage, graph);
+        playTime = (System.currentTimeMillis() - startTime) / 1000;
+
+        Results results = new Results(colors.numberOfColors(), graph.getChromNum(), playTime);
+
+        EndMenu endMenu = new EndMenu(stage, graph, results);
         stage.setScene(endMenu.getEndMenuScene());
 
     }
@@ -144,7 +148,9 @@ public class GameMode2 extends GraphView {
         resBox.setLayoutY(550);
         root.getChildren().add(resBox);
 
-        EndMenu endMenu = new EndMenu(stage, graph);
+        Results results = new Results(colors.numberOfColors(), graph.getChromNum(), playTime);
+
+        EndMenu endMenu = new EndMenu(stage, graph, results);
         stage.setScene(endMenu.getEndMenuScene());
     }
 }
