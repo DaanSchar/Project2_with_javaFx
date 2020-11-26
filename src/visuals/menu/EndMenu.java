@@ -116,6 +116,7 @@ public class EndMenu extends Application {
     private void rerunProgram()
     {
         System.out.println("Rerunning");
+        graph.resetColor();
         GraphViewScene graphViewScene = new GraphViewScene(MENU_CHOICES);
         try {
             graphViewScene.start(stage);
