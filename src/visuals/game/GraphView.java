@@ -401,10 +401,11 @@ public class GraphView
 
 
                             //coloring the line red if 2 vertices have the same color.
-                            checkIfNeedWarning();
+                            makeWarningList();
                             for(int j = 0;j < m; j++)
                             {
                                 //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                                System.out.println("need warning? " + needWarningList[j]);
                                 if(needWarningList[j] == true)
                                 {
                                     lineList[j].setStroke(Color.RED);
@@ -434,7 +435,7 @@ public class GraphView
 
 
                             //coloring the line red if 2 vertices have the same color.
-                            checkIfNeedWarning();
+                            makeWarningList();
                             for(int j = 0;j < m; j++)
                             {
                                 //needWarningList represents if an edge contains 2 vertices that are the same color or not
@@ -458,15 +459,28 @@ public class GraphView
     {
         for(int i = 0; i < m; i++)
         {
-            if( (colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0)  )
+            if ((colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0))
             {
-                needWarningList[i] = true;
                 return true;
-            }   else {
-                needWarningList[i] = false;
-                }
+            }
         }
         return false;
+    }
+
+    public void makeWarningList()
+    {
+        for(int i = 0; i < m; i++)
+        {
+            if( (colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0))
+            {
+                needWarningList[i] = true;
+            }   else {
+
+                System.out.println(colors.getColorOfVertex(e[i].u) + " != " + colors.getColorOfVertex(e[i].v));
+
+                needWarningList[i] = false;
+            }
+        }
     }
 
 
