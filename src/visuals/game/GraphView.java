@@ -136,6 +136,9 @@ public class GraphView
         checkButton.setOnAction(actionEvent ->
         {
             check();
+            //  addition by Daan
+            Hint hint = new Hint(graph);
+
         });
 
         root.getChildren().add(checkButton);
@@ -405,7 +408,6 @@ public class GraphView
                             for(int j = 0;j < m; j++)
                             {
                                 //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                                System.out.println("need warning? " + needWarningList[j]);
                                 if(needWarningList[j] == true)
                                 {
                                     lineList[j].setStroke(Color.RED);
@@ -475,8 +477,6 @@ public class GraphView
             {
                 needWarningList[i] = true;
             }   else {
-
-                System.out.println(colors.getColorOfVertex(e[i].u) + " != " + colors.getColorOfVertex(e[i].v));
 
                 needWarningList[i] = false;
             }

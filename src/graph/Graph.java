@@ -20,7 +20,7 @@ public class Graph
     private static int calc = 250;
 
     /**
-     * retrieves information for the graph from the menu.Menu class
+     * retrieves information for the graph from the graphical menu class
      */
     public Graph()
     {
