@@ -18,10 +18,14 @@ public class Hint
     // this graph object contains the same values as graph, but an empty color object
     private Graph emptyGraph;
 
+    private int[] smallestColorVertices;
+    private int[] largestColorVertices;
+
     public Hint(Graph graph)
     {
         this.graph = graph;
 
+        System.out.println("hint running!");
 
         // making a copy of graph and resetting the color object
         emptyGraph = new Graph();
@@ -29,8 +33,9 @@ public class Hint
         emptyGraph.n = graph.n;
         emptyGraph.m = graph.m;
 
-        System.out.println("hint!");
         calculate();
+        makeSmallestColorVertices();
+        makeLargestColorVertices();
     }
 
 
@@ -52,7 +57,6 @@ public class Hint
             vertexPath[i] = i+1;
         }
 
-        System.out.println("thiss!!!");
         graph.getColor().printColorArray();
 
         boolean found = false;
@@ -95,18 +99,21 @@ public class Hint
 
                 for (int j = 0; j < graph.n; j++)
                 {
+                    // increments totalColored if it finds the same colors in both arrays
                     if(graph.getColor().getColorOfVertex(j+1) == emptyGraph.getColor().getColorOfVertex(j+1) && graph.getColor().getColorOfVertex(j+1) != 0)
                     {
                         totalColored++;
 
+                        // when the total colored vertices + the total not colored vertices = total vertices
                         if(totalColored + nonColored == graph.n)
                         {
-                            System.out.println(graph.getColor().getColorOfVertex(j + 1) + " = " + emptyGraph.getColor().getColorOfVertex(j + 1));
                             System.out.println("chromatic number of calulation: " + chromatic.getChromNum());
                             System.out.println("colors of graph");
                             graph.getColor().printColorArray();
                             System.out.println("colors of emptygraph");
                             emptyGraph.getColor().printColorArray();
+
+                            // stops the while loop
                             found = true;
                         }
                     }
@@ -114,6 +121,109 @@ public class Hint
             }
         }
     }
+
+
+    /**
+     * method to find the largest color in the color object of the algorithm(not the user)
+     */
+    private void makeLargestColorVertices()
+    {
+        int[] colors = emptyGraph.getColor().getColorArray();
+
+        int max = colors[0];
+        int maxVertex = 0;
+        boolean firstIsMax = true;
+
+        for(int i = 0; i < graph.getN(); i++)
+        {
+            if(colors[i] > max)
+            {
+                max = colors[i];
+                maxVertex = i + 1;
+                firstIsMax = false;
+            }
+        }
+
+        // fixes problem that if the biggest vertex is color[0], it returns 0, when we want 1
+        if(firstIsMax)
+        {
+            maxVertex = 1;
+        }
+
+        int[] largestColorVertices = new int[graph.getN()];
+        int count = 0;
+
+        // puts all vertices that contain that largest number in an array
+        for(int i = 0; i < graph.getN(); i++)
+        {
+            if(colors[i] == max)
+            {
+                largestColorVertices[count] = (i + 1);
+                count++;
+            }
+        }
+
+        int[] finalArray = new int[count];
+
+        // puts all values of largestColorVertices[] inside a properly sized array
+        for(int i = 0; i < count; i++)
+        {
+            finalArray[i] = largestColorVertices[i];
+        }
+
+        this.largestColorVertices = finalArray;
+    }
+
+
+    /**
+     * does the same as getLargestColorVertices but then for the smallest color
+     */
+    private void makeSmallestColorVertices()
+    {
+        int[] colors = emptyGraph.getColor().getColorArray();
+
+        int min = colors[0];
+        int minVertex = 0;
+        boolean firstIsMin = true;
+
+        for(int i = 0; i < graph.getN(); i++)
+        {
+            if(colors[i] < min)
+            {
+                min = colors[i];
+                minVertex = i + i;
+                firstIsMin = false;
+            }
+        }
+
+        if(firstIsMin)
+        {
+            minVertex = 1;
+        }
+
+        int[] smallestColorVertices = new int[graph.getN()];
+        int count = 0;
+
+        for(int i = 0; i < graph.getN(); i++)
+        {
+            if(colors[i] == min)
+            {
+                smallestColorVertices[count] = (i + 1);
+                count++;
+            }
+        }
+
+        int[] finalArray = new int[count];
+
+        for(int i = 0; i < count; i++)
+        {
+            finalArray[i] = smallestColorVertices[i];
+        }
+
+        this.smallestColorVertices = finalArray;
+    }
+
+
 
     /**
      * randomizes the order of an array
@@ -133,6 +243,16 @@ public class Hint
             arr[i] = arr[j];
             arr[j] = temp;
         }
+    }
+
+    public int[] getSmallestColorVertices()
+    {
+        return smallestColorVertices;
+    }
+
+    public int[] getLargestColorVertices()
+    {
+        return largestColorVertices;
     }
 
 
