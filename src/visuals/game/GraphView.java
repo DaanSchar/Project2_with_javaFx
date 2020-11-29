@@ -123,13 +123,13 @@ public class GraphView
     }
 
     /**
-     * makes button for simple hint
+     * makes button to check
      *
      */
 
     public void makeCheckButton() {
         Button checkButton = new Button();
-        checkButton.setText("Want a hint?");
+        checkButton.setText("Check?");
         checkButton.setTranslateX(50);
         checkButton.setTranslateY(200);
 
@@ -143,7 +143,7 @@ public class GraphView
 
 
     /**
-     * a very simple hint function
+     * a check function
      *
      */
 
@@ -181,6 +181,22 @@ public class GraphView
         {
             end();
         }
+        else if(colors.getColoredVert() == graph.getN() && checkIfNeedWarning() == true)
+        {
+            check();
+        }
+    }
+
+    public boolean checkIfNeedWarning()
+    {
+        for(int i = 0; i < m; i++)
+        {
+            if ((colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -455,17 +471,6 @@ public class GraphView
         }
     }
 
-    public boolean checkIfNeedWarning()
-    {
-        for(int i = 0; i < m; i++)
-        {
-            if ((colors.getColorOfVertex(e[i].u) == colors.getColorOfVertex(e[i].v)) && (colors.getColorOfVertex(e[i].u) != 0))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void makeWarningList()
     {

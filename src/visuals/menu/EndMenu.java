@@ -46,8 +46,7 @@ public class EndMenu extends Application {
     @Override
     public void start(Stage stage){
 
-        //add resultLabel1
-
+        //add resultLabels
         resultLabel1 = new Label();
         resultLabel2 = new Label();
         resultLabel3 = new Label();
@@ -59,17 +58,16 @@ public class EndMenu extends Application {
         resultLabel1.setText("Game Over");
         resultLabel1.setTextFill(Color.WHITE);
 
-        resultLabel2.setText("You used " + results.getNumberOfColors() + " Colors");
+        resultLabel2.setText("You used " + results.getNumberOfColors() + " colors");
         resultLabel2.setTextFill(Color.WHITE);
 
-        resultLabel3.setText("The Chromatic Number is " + results.getChromNum());
+        resultLabel3.setText("The chromatic number for this graph is " + results.getChromNum());
         resultLabel3.setTextFill(Color.WHITE);
 
-        resultLabel4.setText("You took  " + results.getPlayTime() + " Seconds");
+        resultLabel4.setText("It took you  " + results.getPlayTime() + " seconds");
         resultLabel4.setTextFill(Color.WHITE);
 
         //Buttons in End Menu
-
         tryAgain.setText("Try Again");
         tryAgain.setTextFill(Color.BLACK);
         tryAgain.setOnAction(e -> rerunProgram());

@@ -1,16 +1,26 @@
 package visuals.game;
 
+import menu.ScoreData;
+
 public class Results
 {
-    int numberOfColors;
-    int chromNum;
-    long playTime;
+    private int gamemode;
+    private int numberOfColors;
+    private int chromNum;
+    private long playTime;
+    //private int level;
+    public ScoreData scores;
 
-    public Results(int numberOfColors, int chromNum, long playTime)
+
+    public Results(int gamemode, int numberOfColors, int chromNum, long playTime)
     {
+        this.gamemode = gamemode;
         this.numberOfColors = numberOfColors;
         this.chromNum = chromNum;
         this.playTime = playTime;
+        //this.level = getLevel();
+        ScoreData.add(gamemode, numberOfColors, chromNum, playTime);
+
     }
 
     public int getNumberOfColors()
@@ -27,5 +37,10 @@ public class Results
     {
         return playTime;
     }
+
+    /*public int getLevel()
+    {
+
+    }*/
 
 }

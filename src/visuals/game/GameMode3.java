@@ -24,8 +24,6 @@ public class GameMode3 extends GraphView{
     private int move;
     private long startTime;
     private long playTime;
-    private Label resultLabel3 = new Label();
-    private int totalVertices;
     private Stage stage;
     private Results results;
 
@@ -33,11 +31,8 @@ public class GameMode3 extends GraphView{
     public GameMode3(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
         this.graph = graph;
-        move = move;
-        vertex = vertex;
-        start();
-        System.out.println(graph.n);
         stage = GraphicalMenu.stage;
+        start();
     }
 
     public void start()
@@ -48,8 +43,6 @@ public class GameMode3 extends GraphView{
         startTime = System.currentTimeMillis();
         showPath();
         System.out.println("running gamemode 3!");
-        System.out.println(move);
-        System.out.println(Arrays.toString(newPath));
     }
 
 
@@ -95,7 +88,7 @@ public class GameMode3 extends GraphView{
 
 
                 //coloring the line red if 2 vertices have the same color.
-                checkIfNeedWarning();
+                makeWarningList();
                 for(int j = 0;j < m; j++)
                 {
                     //needWarningList represents if an edge contains 2 vertices that are the same color or not
@@ -129,7 +122,7 @@ public class GameMode3 extends GraphView{
 
 
             //coloring the line red if 2 vertices have the same color.
-            checkIfNeedWarning();
+            makeWarningList();
             for(int j = 0;j < m; j++)
             {
                 //needWarningList represents if an edge contains 2 vertices that are the same color or not
@@ -248,41 +241,11 @@ public class GameMode3 extends GraphView{
         playTime = (System.currentTimeMillis() - startTime) / 1000;
 
         //make results object
-        Results results = new Results(colors.numberOfColors(), graph.getChromNum(), playTime);
+        Results results = new Results(3, colors.numberOfColors(), graph.getChromNum(), playTime);
 
         //call endMenu
         EndMenu endMenu = new EndMenu(stage, graph, results);
         stage.setScene(endMenu.getEndMenuScene());
-
-
-
-        /*if(colors.numberOfColors() == graph.getChromNum())
-        {
-            resultLabel1.setText("You found the chromatic number! You are a graph-coloring hero.");
-            resultLabel1.setTextFill(Color.BLACK);
-            resultLabel2.setText("The chromatic number for this graph is " + graph.getChromNum() + ". You used " + colors.numberOfColors() + " colors.");
-            resultLabel2.setTextFill(Color.BLACK);
-            resultLabel3.setText("It took you: " + playTime + " seconds to complete");
-            resultLabel3.setTextFill(Color.BLACK);
-        }
-        else if(colors.numberOfColors() != graph.getChromNum())
-        {
-            resultLabel1.setText("Game Over.");
-            resultLabel1.setTextFill(Color.BLACK);
-            resultLabel2.setText("You used " + colors.numberOfColors() + " colors. The chromatic number for this graph is " + graph.getChromNum());
-            resultLabel2.setTextFill(Color.BLACK);
-            resultLabel3.setText("It took you: " + playTime + " seconds to complete");
-            resultLabel3.setTextFill(Color.BLACK);
-        }
-
-
-        //add resBox containing resultLabels
-        VBox resBox = new VBox(20);
-        resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2, resultLabel3);
-        resBox.setLayoutX(15);
-        resBox.setLayoutY(550);
-        root.getChildren().add(resBox);*/
     }
 
 }
