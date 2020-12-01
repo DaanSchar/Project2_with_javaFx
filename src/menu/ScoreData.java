@@ -5,6 +5,7 @@ import visuals.game.Results;
 /**
  * data storage object to store scores from all gamemodes
  */
+
 public class ScoreData
 {
     private int level;
@@ -21,8 +22,10 @@ public class ScoreData
 
     public ScoreData()
     {
-
-
+        highScore1 = 0;
+        highScore3 = 0;
+        count1 = 0;
+        count3 = 0;
     }
 
     public static void add(int gamemode, int numberOfColors, int chromNum, long playTime)
@@ -43,7 +46,7 @@ public class ScoreData
 
     public static void setHighScore1(long playTime)
     {
-        if(count1 == 0 || playTime > highScore1)
+        if(count1 == 0 || playTime < highScore1)
         {
             highScore1 = playTime;
         }
@@ -58,17 +61,23 @@ public class ScoreData
 
     public static void setHighScore3(long playTime)
     {
-        if(count3 == 0 || playTime > highScore1)
+        if(count3 == 0 || playTime < highScore1)
         {
             highScore3 = playTime;
         }
         count3++;
+        System.out.println("Highscore added!");
 
     }
 
+    public static long getHighScore1()
+    {
+        return highScore1;
+    }
 
-
-
-
-
+    public static long getHighScore3()
+    {
+        return highScore3;
+    }
 }
+

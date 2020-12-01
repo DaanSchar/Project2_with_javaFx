@@ -16,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
-//import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
 
 public class GraphViewScene extends Application {
@@ -65,25 +64,13 @@ public class GraphViewScene extends Application {
         layout.setBackground(new Background(new BackgroundFill(Color.web("#282828"), CornerRadii.EMPTY, Insets.EMPTY)));
 
         graphViewScene = new Scene(layout,Main.windowSizeX, Main.windowSizeY);
-
-        /*//  transition to the next scene by making a endMenu object, inserting
-        //  the stage of this class inside the start method of endMenu and setting the scene of this
-        //  class' stage to the scene made in endMenu
-        EndMenu endMenu = new EndMenu();
-        try {
-            endMenu.start(stage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        stage.setScene(endMenu.getEndMenuScene());*/
-
     }
+
+
     public static GraphicalMenu.MenuChoices setMenuChoices()
     {
         return menuChoices;
     }
-
-
 
 
     public Scene getGraphViewScene()

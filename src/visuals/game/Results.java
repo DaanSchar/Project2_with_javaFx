@@ -1,5 +1,7 @@
 package visuals.game;
 
+//import menu.ScoreData;
+
 import menu.ScoreData;
 
 public class Results
@@ -42,5 +44,10 @@ public class Results
     {
 
     }*/
+
+    public int getGamemode()
+    {
+        return gamemode;
+    }
 
 }

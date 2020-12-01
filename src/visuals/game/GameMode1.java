@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import menu.ScoreData;
 import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
 
