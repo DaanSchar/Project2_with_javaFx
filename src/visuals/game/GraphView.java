@@ -66,8 +66,10 @@ public class GraphView
     protected Button checkButton;
     protected VBox resBox;
     protected Label resultLabel1;
+    protected Label hintLabel;
     protected Label resultLabel2;
     private Label resultLabel3;
+    protected boolean firstHintUsed;
 
 
     /**
@@ -117,9 +119,10 @@ public class GraphView
         setButtonAction();
         makeCheckButton();
         root.getChildren().add(resBox);
-        resultLabel1.setTextFill(Color.BLACK);
-        resultLabel2.setTextFill(Color.BLACK);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2);
+        hintLabel.setTextFill(Color.LIGHTGRAY);
+        resultLabel1.setTextFill(Color.LIGHTGRAY);
+        resultLabel2.setTextFill(Color.LIGHTGRAY);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2, hintLabel);
     }
 
     /**
@@ -133,11 +136,28 @@ public class GraphView
         checkButton.setTranslateX(50);
         checkButton.setTranslateY(200);
 
+        hintLabel = new Label();
+
+        firstHintUsed = false;
+
         checkButton.setOnAction(actionEvent ->
         {
             check();
-            //  addition by Daan
+
             Hint hint = new Hint(graph);
+
+            // checks if the hint butten has been pressed before
+            if(firstHintUsed)
+            {
+                System.out.println("printing smallest numbers");
+
+                hintLabel.setText("These vertices should be colored 1:\n" + Arrays.toString(hint.getSmallestColorVertices()));
+            } else {
+                System.out.println("printing largest numbers");
+
+                hintLabel.setText("These vertices should be colored the Largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+                firstHintUsed = true;
+            }
 
         });
 
@@ -595,7 +615,7 @@ public class GraphView
      */
     protected void makeCircle(int vertex)
     {
-        //retrieves the coordinates of eacht vertex from positions
+        //retrieves the coordinates of each vertex from positions
         Coordinate cord = new Coordinate();
         cord = positions[vertex];
 
