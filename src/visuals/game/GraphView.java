@@ -69,7 +69,13 @@ public class GraphView
     protected Label hintLabel;
     protected Label resultLabel2;
     private Label resultLabel3;
+
+    protected Button lineHintButton;
+    protected Button hoverHintButton;
+
     protected boolean firstHintUsed;
+    protected boolean lineHintPressed;
+    protected boolean hoverHintPressed;
 
 
     /**
@@ -118,6 +124,9 @@ public class GraphView
         setHoverEvent();
         setButtonAction();
         makeCheckButton();
+        makeLineHintButton();
+        makeHoverHintButton();
+
         root.getChildren().add(resBox);
         hintLabel.setTextFill(Color.LIGHTGRAY);
         resultLabel1.setTextFill(Color.LIGHTGRAY);
@@ -132,7 +141,7 @@ public class GraphView
 
     public void makeCheckButton() {
         Button checkButton = new Button();
-        checkButton.setText("Check?");
+        checkButton.setText("Hint");
         checkButton.setTranslateX(50);
         checkButton.setTranslateY(200);
 
@@ -162,6 +171,39 @@ public class GraphView
         });
 
         root.getChildren().add(checkButton);
+    }
+
+
+    protected void makeLineHintButton()
+    {
+        lineHintButton = new Button("Line Hint");
+        lineHintButton.setTranslateX(50);
+        lineHintButton.setTranslateY(250);
+
+        lineHintPressed = false;
+
+        lineHintButton.setOnAction(e ->
+        {
+            lineHintPressed = true;
+        });
+
+        root.getChildren().add(lineHintButton);
+    }
+
+    protected void makeHoverHintButton()
+    {
+        hoverHintButton = new Button("hover Hint");
+        hoverHintButton.setTranslateX(50);
+        hoverHintButton.setTranslateY(300);
+
+        hoverHintPressed = false;
+
+        hoverHintButton.setOnAction(e ->
+        {
+            hoverHintPressed = true;
+        });
+
+        root.getChildren().add(hoverHintButton);
     }
 
 
@@ -366,19 +408,22 @@ public class GraphView
             buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
             buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
 
-            Coordinate cord = new Coordinate();
-            cord.x = (int)buttonList[connectedVertices[j]-1].getLayoutX();
-            cord.y = (int)buttonList[connectedVertices[j]-1].getLayoutY();
+            if(hoverHintPressed)
+            {
+                Coordinate cord = new Coordinate();
+                cord.x = (int) buttonList[connectedVertices[j] - 1].getLayoutX();
+                cord.y = (int) buttonList[connectedVertices[j] - 1].getLayoutY();
 
-            //draws a shape on each adjacent vertex
-            circles[j] = new Circle(cord.x, cord.y, 5);
-            circles[j].setFill(Color.WHITE);
-            root.getChildren().add(circles[j]);
+                //draws a shape on each adjacent vertex
+                circles[j] = new Circle(cord.x, cord.y, 5);
+                circles[j].setFill(Color.WHITE);
+                root.getChildren().add(circles[j]);
 
-            //makes a a border around the circle(by making a smaller circle inside the existing circle)
-            circles2[j] = new Circle(cord.x, cord.y, 4);
-            circles2[j].setFill(Color.RED);
-            root.getChildren().add(circles2[j]);
+                //makes a a border around the circle(by making a smaller circle inside the existing circle)
+                circles2[j] = new Circle(cord.x, cord.y, 4);
+                circles2[j].setFill(Color.RED);
+                root.getChildren().add(circles2[j]);
+            }
         }
     }
 
@@ -404,9 +449,12 @@ public class GraphView
             buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
             buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
 
-            //removes the shapes drawn on the adjacent vertices from root
-            root.getChildren().remove(circles[j]);
-            root.getChildren().remove(circles2[j]);
+            if(hoverHintPressed)
+            {
+                //removes the shapes drawn on the adjacent vertices from root
+                root.getChildren().remove(circles[j]);
+                root.getChildren().remove(circles2[j]);
+            }
         }
     }
 
@@ -440,15 +488,18 @@ public class GraphView
 
 
                             //coloring the line red if 2 vertices have the same color.
-                            makeWarningList();
-                            for(int j = 0;j < m; j++)
+                            if(lineHintPressed)
                             {
-                                //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                                if(needWarningList[j] == true)
+                                makeWarningList();
+                                for (int j = 0; j < m; j++)
                                 {
-                                    lineList[j].setStroke(Color.RED);
-                                }   else {
-                                    colorLine(j);
+                                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                                    if (needWarningList[j] == true)
+                                    {
+                                        lineList[j].setStroke(Color.RED);
+                                    } else {
+                                        colorLine(j);
+                                    }
                                 }
                             }
                             autoCheck(); //performs auto-check after each move
@@ -473,15 +524,18 @@ public class GraphView
 
 
                             //coloring the line red if 2 vertices have the same color.
-                            makeWarningList();
-                            for(int j = 0;j < m; j++)
+                            if(lineHintPressed)
                             {
-                                //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                                if(needWarningList[j] == true)
+                                makeWarningList();
+                                for (int j = 0; j < m; j++)
                                 {
-                                    lineList[j].setStroke(Color.RED);
-                                }   else {
-                                    colorLine(j);
+                                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                                    if (needWarningList[j] == true)
+                                    {
+                                        lineList[j].setStroke(Color.RED);
+                                    } else {
+                                        colorLine(j);
+                                    }
                                 }
                             }
                             autoCheck(); //performs auto-check after each move
