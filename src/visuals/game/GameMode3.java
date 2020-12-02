@@ -1,6 +1,7 @@
 package visuals.game;
 
 import gamemodes.RandomPath;
+import graph.Colors;
 import graph.Graph;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -231,6 +232,16 @@ public class GameMode3 extends GraphView{
         //removes the text
         root.getChildren().remove(currentVertex);
     }
+
+    /**
+     * not useful for gamemode3
+     */
+
+    /*@Override
+    protected void makeCheckButton()
+    {
+        System.out.println("MakeCheckButton has been overwritten by gamemode3");
+    }*/
 
     /**
      * when all vertices in path are colored

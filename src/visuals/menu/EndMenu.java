@@ -99,7 +99,7 @@ public class EndMenu extends Application {
         }
         else if(results.getGamemode() == 2)
         {
-            resultLabel5.setText("Your highscore is 2");
+            resultLabel5.setText("Your highscore is not processed yet");
         }
         else if(results.getGamemode() == 3)
         {

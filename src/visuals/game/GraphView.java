@@ -130,9 +130,9 @@ public class GraphView
      *
      */
 
-    public void makeCheckButton() {
+    protected void makeCheckButton() {
         Button checkButton = new Button();
-        checkButton.setText("Check?");
+        checkButton.setText("Want a hint?");
         checkButton.setTranslateX(50);
         checkButton.setTranslateY(200);
 
