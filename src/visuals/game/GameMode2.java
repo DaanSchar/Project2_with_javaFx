@@ -1,3 +1,9 @@
+/**
+ * class that implements gamemode2
+ * @author: Leo
+ */
+
+
 package visuals.game;
 
 import graph.Graph;
@@ -9,18 +15,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
-//import visuals.menu.EndMenu;
 
-import java.awt.event.MouseEvent;
 
 public class GameMode2 extends GraphView {
 
@@ -34,7 +36,6 @@ public class GameMode2 extends GraphView {
     private long playTime;
     private Graph graph;
     private Stage stage;
-    private Results results;
 
     public GameMode2(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
@@ -43,6 +44,9 @@ public class GameMode2 extends GraphView {
         start();
     }
 
+    /**
+     * starts the game
+     */
     public void start()
     {
         setTimer();
@@ -95,7 +99,6 @@ public class GameMode2 extends GraphView {
 
     /**
      * when time is over before chromNum is reached
-     * returns: number of colors used
      *
      */
 
@@ -111,8 +114,7 @@ public class GameMode2 extends GraphView {
     }
 
     /**
-     * when chromNum is reached before time is out
-     * returns: time needed to complete
+     * ends game when chromNum is reached before time is out
      */
 
     @Override

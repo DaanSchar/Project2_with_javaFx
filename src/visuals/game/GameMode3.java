@@ -1,33 +1,31 @@
+/**
+ * class that implements gamemode3
+ * @author: Leo
+ */
+
+
 package visuals.game;
 
 import gamemodes.RandomPath;
-import graph.Colors;
 import graph.Graph;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
 
-import java.util.Arrays;
 
 public class GameMode3 extends GraphView{
 
     private Graph graph;
-    private RandomPath randomPath;
     private int[] newPath;
     private int vertex;
     private int move;
     private long startTime;
     private long playTime;
     private Stage stage;
-    private Results results;
-
 
     public GameMode3(Graph graph, int windowSizeX, int windowSizeY) {
         super(graph, windowSizeX, windowSizeY);
@@ -36,16 +34,18 @@ public class GameMode3 extends GraphView{
         start();
     }
 
+    /**
+     * starts the game
+     */
     public void start()
     {
-        RandomPath randomPath = new RandomPath(graph.n); //could be a problem -- check!!
+        RandomPath randomPath = new RandomPath(graph.n);
         randomPath.makeRandomPath();
         newPath = randomPath.getRandomPath();
         startTime = System.currentTimeMillis();
         showPath();
         System.out.println("running gamemode 3!");
     }
-
 
     /**
      * gets the next vertex from the random path
@@ -87,17 +87,19 @@ public class GameMode3 extends GraphView{
                 //sets the color of the button to the associated color in the randColor list;
                 b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
 
-
                 //coloring the line red if 2 vertices have the same color.
-                makeWarningList();
-                for(int j = 0;j < m; j++)
+                if(lineHintPressed)
                 {
-                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                    if(needWarningList[j] == true)
+                    makeWarningList();
+                    for(int j = 0;j < m; j++)
                     {
-                        lineList[j].setStroke(Color.RED);
-                    }   else {
-                        colorLine(j);
+                        //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                        if(needWarningList[j] == true)
+                        {
+                            lineList[j].setStroke(Color.RED);
+                        }   else {
+                            colorLine(j);
+                        }
                     }
                 }
                 confirmButton(b);
@@ -121,17 +123,19 @@ public class GameMode3 extends GraphView{
             //sets the color of the button to the associated color in the randColor list;
             b.setStyle("-fx-background-color: " + randColors[colors.getColorOfVertex(textForButtonAction)] + "; ");
 
-
             //coloring the line red if 2 vertices have the same color.
-            makeWarningList();
-            for(int j = 0;j < m; j++)
+            if(lineHintPressed)
             {
-                //needWarningList represents if an edge contains 2 vertices that are the same color or not
-                if(needWarningList[j] == true)
+                makeWarningList();
+                for(int j = 0;j < m; j++)
                 {
-                    lineList[j].setStroke(Color.RED);
-                }   else {
-                    colorLine(j);
+                    //needWarningList represents if an edge contains 2 vertices that are the same color or not
+                    if(needWarningList[j] == true)
+                    {
+                        lineList[j].setStroke(Color.RED);
+                    }   else {
+                        colorLine(j);
+                    }
                 }
             }
             confirmButton(b);
@@ -178,7 +182,7 @@ public class GameMode3 extends GraphView{
     }
 
     /**
-     * @Override setHoverEvent from graphView
+     * @Override setHoverEvent from graphView - not used here!
      */
     @Override
     public void setHoverEvent()
@@ -186,6 +190,9 @@ public class GameMode3 extends GraphView{
         System.out.println("setHoverEvent has been overwritten by GameMode3");
     }
 
+    /**
+     * @Override setButtonAction from graphView - not used here!
+     */
     @Override
     public void setButtonAction()
     {
@@ -216,7 +223,7 @@ public class GameMode3 extends GraphView{
     }
 
     /**
-     * sets what happens after player move
+     * sets what happens after each play move
      * @Override from graphView
      * @param b button we want to give these event conditions
      */
@@ -234,17 +241,7 @@ public class GameMode3 extends GraphView{
     }
 
     /**
-     * not useful for gamemode3
-     */
-
-    /*@Override
-    protected void makeCheckButton()
-    {
-        System.out.println("MakeCheckButton has been overwritten by gamemode3");
-    }*/
-
-    /**
-     * when all vertices in path are colored
+     * ends game when all vertices in path are colored
      */
     @Override
     public void end()

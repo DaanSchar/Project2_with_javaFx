@@ -1,11 +1,13 @@
+/**
+ * class that implements gamemode1
+ * @author: Leo
+ */
+
+
 package visuals.game;
 
 
 import graph.Graph;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import visuals.menu.EndMenu;
 import visuals.menu.GraphicalMenu;
@@ -15,10 +17,8 @@ public class GameMode1 extends GraphView{
 
     private long startTime;
     private long playTime;
-    private int chromNum;
     private Graph graph;
     private Stage stage;
-    private Results results;
     //public ScoreData score = new ScoreData();
 
     public GameMode1(Graph graph, int windowSizeX, int windowSizeY) {
@@ -28,6 +28,9 @@ public class GameMode1 extends GraphView{
         start();
     }
 
+    /**
+     * starts the game
+     */
     public void start()
     {
         startTime = System.currentTimeMillis();
@@ -35,7 +38,7 @@ public class GameMode1 extends GraphView{
     }
 
     /**
-     * when chromNum is reached
+     * ends game when chromNum is reached
      */
     @Override
     public void end()
