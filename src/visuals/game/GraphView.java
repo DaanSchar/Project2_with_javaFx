@@ -327,20 +327,21 @@ public class GraphView
         currentVertex.setFill(Color.WHITE);
         root.getChildren().add(currentVertex);
 
-        for(int j = 0; j < connectedVertices.length; j++)
-        {
-            //scales the buttons adjacent to the vertex by 1.25
-            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
-            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
 
-            if(hoverHintPressed)
+        if(hoverHintPressed)
+        {
+
+            for(int j = 0; j < connectedVertices.length; j++)
             {
+                //scales the buttons adjacent to the vertex by 1.25
+                buttonList[connectedVertices[j]-1].setScaleX(buttonScaler * 1.1);
+                buttonList[connectedVertices[j]-1].setScaleY(buttonScaler * 1.1);
+
                 Coordinate cord = new Coordinate();
                 cord.x = (int) buttonList[connectedVertices[j] - 1].getLayoutX();
                 cord.y = (int) buttonList[connectedVertices[j] - 1].getLayoutY();
 
-                //draws a shape on each adjacent vertex
-                circles[j] = new Circle(cord.x, cord.y, 5);
+                //draws a shape on each adjacent vertexcircles[j] = new Circle(cord.x, cord.y, 5);
                 circles[j].setFill(Color.WHITE);
                 root.getChildren().add(circles[j]);
 
@@ -367,14 +368,14 @@ public class GraphView
         //removes the text
         root.getChildren().remove(currentVertex);
 
-        //sets the size of all connected buttons back to the default size
-        for(int j = 0; j < connectedVertices.length; j++)
+        if(hoverHintPressed)
         {
-            buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
-            buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
-
-            if(hoverHintPressed)
+            //sets the size of all connected buttons back to the default size
+            for(int j = 0; j < connectedVertices.length; j++)
             {
+                buttonList[connectedVertices[j]-1].setScaleX(buttonScaler);
+                buttonList[connectedVertices[j]-1].setScaleY(buttonScaler);
+
                 //removes the shapes drawn on the adjacent vertices from root
                 root.getChildren().remove(circles[j]);
                 root.getChildren().remove(circles2[j]);
