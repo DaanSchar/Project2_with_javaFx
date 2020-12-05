@@ -5,10 +5,8 @@
 
 package graph;
 
-
 public class Colors
 {
-
     private int n;
     private int colorArray[];
 

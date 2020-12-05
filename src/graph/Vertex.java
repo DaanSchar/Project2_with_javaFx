@@ -1,15 +1,17 @@
-package graph;
+/**
+ * this class handles in making arrays for each vertex containing all other vertices
+ * which are connected to that vertex
+ */
 
-import graph.ColEdge;
-import graph.Graph;
+package graph;
 
 public class Vertex
 {
 
-    private ColEdge[] e;
     public int[] connectedVerticesArray;
     public int[] convertedConnectedVerticesArray;
     private int n;
+    private ColEdge[] e;
     private Graph graph;
 
 
@@ -58,19 +60,6 @@ public class Vertex
     }
 
 
-    /** returns the array containing all adjacent vertices of vertex
-     *
-     * @param vertex the vertex we wish to have an array of
-     * @return an integer array
-     */
-    //returns the array containing all vertices connected to vertex
-    public int[] getConnVerArray(int vertex)
-    {
-        connVerArray(vertex);
-        return connectedVerticesArray;
-    }
-
-
     /**
      * prints the array of vertices connected to vertex
      */
@@ -85,5 +74,11 @@ public class Vertex
         System.out.println();
     }
 
+
+    public int[] getConnVerArray(int vertex)
+    {
+        connVerArray(vertex);
+        return connectedVerticesArray;
+    }
 
 }
