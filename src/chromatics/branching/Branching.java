@@ -101,10 +101,6 @@ public class Branching
     }
 
 
-    /**
-     * returns the smallest chromatic number calculated
-     * @return int BranchingNum
-     */
     public int getBranchingNum()
     {
         BranchingChromNum();

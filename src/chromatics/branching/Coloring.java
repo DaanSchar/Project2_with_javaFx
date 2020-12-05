@@ -54,10 +54,7 @@ public class Coloring
         }
     }
 
-    /**
-     * returns the graph.Color Object colorOfColoringObject
-     * @return graph.Color colorfOfColoringObject
-     */
+
     public Colors getColorOfColoringObject()
     {
         return colorsOfColoringObject;
