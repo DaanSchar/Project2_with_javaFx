@@ -1,7 +1,6 @@
 package graph;
 
 import chromatics.branching.Branching;
-import menu.Menu;
 import visuals.menu.GraphicalMenu;
 
 /**
