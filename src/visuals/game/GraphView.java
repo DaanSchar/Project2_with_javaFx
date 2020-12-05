@@ -28,8 +28,24 @@ import java.util.Random;
 public class GraphView
 {
 
-    public Group root;
+    private ColEdge[] e;
     protected Graph graph;
+    protected int n;
+    protected int m;
+
+    protected Label hintLabel;
+    protected Label resultLabel1;
+    protected Label resultLabel2;
+
+    protected Button lineHintButton;
+    protected Button hoverHintButton;
+    protected Button quickHintButton;
+
+    protected boolean lineHintPressed;
+    protected boolean hoverHintPressed;
+    protected boolean quickHintPressed;
+
+    public Group root;
     protected PickVertexColor pick;
     private int windowSizeX;
     private int windowSizeY;
@@ -38,14 +54,12 @@ public class GraphView
     protected int textForButtonHover;
     private Coordinate[] positions;
     private Grid grid;
-    private ColEdge[] e;
-    protected int n;
-    protected int m;
 
     protected int[] connectedVertices;
     protected String[] lineColorList;
-    protected int lineCount;
     protected Line[] lineList;
+    protected int lineCount;
+    protected double lineScaler;
     protected Boolean[] needWarningList;
 
     protected Circle[] circles;
@@ -57,27 +71,15 @@ public class GraphView
     protected String[] randColors;
     protected Vertex vertex;
     protected double buttonScaler;
-    protected double lineScaler;
     protected Text currentVertex;
     protected Button checkButton;
+
     protected VBox resBox;
-    protected Label hintLabel;
-    protected Label resultLabel1;
-    protected Label resultLabel2;
-
-
-    protected Button lineHintButton;
-    protected Button hoverHintButton;
-    protected Button quickHintButton;
-
-    protected boolean lineHintPressed;
-    protected boolean hoverHintPressed;
-    protected boolean quickHintPressed;
 
 
     /**
      *  for some reason i cant use a constructor while linking an fxml file, so when creating a GraphView object,
-     *  immediately execute this method as a constructor-replaces
+     *  immediately execute this method as a constructor-replacer
      *
      * @param graph graph object of the graph
      * @param windowSizeX   horizontal size of the window
@@ -132,10 +134,6 @@ public class GraphView
         resultLabel2.setTextFill(Color.LIGHTGRAY);
         resBox.getChildren().addAll(resultLabel1,resultLabel2, hintLabel);
     }
-
-    /**
-     * first part: code implementing game-logic that is used by all gamemodes
-     */
 
     /**
      * set Labels to null after use
@@ -384,6 +382,9 @@ public class GraphView
     }
 
 
+    /**
+     * sets the event that occurs when clicking the vertex button
+     */
     protected void setButtonAction()
     {
         //  loops because it needs these effects need to be applied to all buttons in the button list
@@ -516,13 +517,16 @@ public class GraphView
         }
 
         // waits a couple seconds and colors the lines back to gray
-        try { Thread.sleep(4500); } catch (InterruptedException interruptedException) { interruptedException.printStackTrace(); }
         for (int j = 0; j < m; j++)
         {
             colorLine(j);
         }
     }
 
+
+    /**
+     * determines for each edge if a warning is needed(if both vertices' color are the same) and stores it
+     */
     public void makeWarningList()
     {
         for(int i = 0; i < m; i++)
@@ -537,6 +541,9 @@ public class GraphView
         }
     }
 
+    /**
+     * determines if one of the edges needs a warning
+     */
     public boolean checkIfNeedWarning()
     {
         for(int i = 0; i < m; i++)
@@ -560,19 +567,11 @@ public class GraphView
     }
 
 
-
-    /**
-     * part 2: code setting up the layout and graphical display showing the graph and visual elements of the game
-     */
-
-
-
     /**
      * determines the size of the buttons
      */
     protected void scaleButtons()
     {
-
         buttonScaler = 1.05;
 
         if(n < 10)
@@ -751,7 +750,7 @@ public class GraphView
      *
      * @param vertex vertex we want to place on the pane
      */
-    protected void makeCircle(int vertex)
+    protected void makeButtonOnVertex(int vertex)
     {
         //retrieves the coordinates of each vertex from positions
         Coordinate cord = new Coordinate();
@@ -879,7 +878,7 @@ public class GraphView
         //makes n circles
         for(int i = 0; i < n; i++)
         {
-            makeCircle(i);
+            makeButtonOnVertex(i);
         }
 
     }

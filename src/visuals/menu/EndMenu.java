@@ -30,10 +30,12 @@ public class EndMenu extends Application {
     private Label resultLabel3;
     private Label resultLabel4;
     private Label resultLabel5;
+
     private Graph graph;
     private Stage stage;
     private Results results;
     private GraphicalMenu.MenuChoices MENU_CHOICES;
+
     public ScoreData scores;
 
 

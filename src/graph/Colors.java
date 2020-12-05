@@ -1,20 +1,16 @@
-package graph;
-
-
-
 /**
  * this class stores the color of each vertex of the graph inside colorArray[]
  *
- * @author Daan
  */
+
+package graph;
+
 
 public class Colors
 {
 
     private int n;
     private int colorArray[];
-
-
 
     public Colors(int totalVertices)
     {
@@ -29,10 +25,10 @@ public class Colors
         }
     }
 
+
     /**
      * returns how many vertices have been colored already - useful as hint and to determine end of gamemode1
      */
-
     public int getColoredVert()
     {
         int count = 0;
@@ -47,16 +43,6 @@ public class Colors
         return coloredVert;
     }
 
-    /** returns the color of vertex
-     *
-     * @param vertex the vertex we wish to retrieve the color of
-     * @return color of vertex
-     */
-    public int getColorOfVertex(int vertex)
-    {
-        return colorArray[vertex-1];
-    }
-
 
     /** sets the color value of vertex
      *
@@ -66,16 +52,6 @@ public class Colors
     public void setColorOfVertex(int vertex, int color)
     {
         colorArray[vertex-1] = color;
-    }
-
-
-    /** returns the array containg each vertex and their color
-     *
-     * @return int array containg all vertices and their color
-     */
-    public int[] getColorArray()
-    {
-        return colorArray;
     }
 
     /**
@@ -94,13 +70,14 @@ public class Colors
      * counts number of distinct colors in colorArray
      * @return number of distinct colors
      */
-
     public int numberOfColors()
     {
         int count = 0;
+
         for(int i = 0; i < colorArray.length; i++)
         {
             int j = 0;
+
             for(j = 0; j < i; j++)
                 if(colorArray[i] == colorArray[j])
                 {
@@ -110,10 +87,20 @@ public class Colors
             {
                 count++;
             }
-
         }
         return count;
+    }
 
+
+
+    public int[] getColorArray()
+    {
+        return colorArray;
+    }
+
+    public int getColorOfVertex(int vertex)
+    {
+        return colorArray[vertex-1];
     }
 
 
