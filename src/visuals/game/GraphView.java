@@ -61,7 +61,8 @@ public class GraphView
     protected Text currentVertex;
     protected Button checkButton;
     protected VBox resBox;
-    protected Label hintLabel;
+    protected Label hintLabel1;
+    protected Label hintLabel2;
     protected Label resultLabel1;
     protected Label resultLabel2;
 
@@ -127,10 +128,11 @@ public class GraphView
         makeQuickHintButton();
 
         root.getChildren().add(resBox);
-        hintLabel.setTextFill(Color.LIGHTGRAY);
+        hintLabel1.setTextFill(Color.LIGHTGRAY);
+        hintLabel2.setTextFill(Color.LIGHTGRAY);
         resultLabel1.setTextFill(Color.LIGHTGRAY);
         resultLabel2.setTextFill(Color.LIGHTGRAY);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2, hintLabel);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2, hintLabel1, hintLabel2);
     }
 
     /**
@@ -193,11 +195,11 @@ public class GraphView
     public void makeLargestHintButton()
     {
         Button largestHintButton = new Button();
-        largestHintButton.setText("largest color Hint");
+        largestHintButton.setText("I need some help.");
         largestHintButton.setTranslateX(50);
         largestHintButton.setTranslateY(150);
 
-        hintLabel = new Label();
+        hintLabel1 = new Label();
 
         largestHintButton.setOnAction(actionEvent ->
         {
@@ -206,7 +208,7 @@ public class GraphView
 
             System.out.println("printing largest numbers");
 
-            hintLabel.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+            hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
 
         });
 
@@ -220,11 +222,11 @@ public class GraphView
     public void makeSmallestHintButton()
     {
         Button smallestHintButton = new Button();
-        smallestHintButton.setText("smallest color Hint");
+        smallestHintButton.setText("I really need some help!!");
         smallestHintButton.setTranslateX(50);
         smallestHintButton.setTranslateY(200);
 
-        hintLabel = new Label();
+        hintLabel2 = new Label();
 
         smallestHintButton.setOnAction(actionEvent ->
         {
@@ -232,7 +234,7 @@ public class GraphView
 
             System.out.println("printing smallest numbers");
 
-            hintLabel.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
+            hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
         });
 
         root.getChildren().add(smallestHintButton);
@@ -244,7 +246,7 @@ public class GraphView
      */
     protected void makeLineHintButton()
     {
-        lineHintButton = new Button("Line Hint");
+        lineHintButton = new Button("Graph Coloring Assistant 1");
         lineHintButton.setTranslateX(50);
         lineHintButton.setTranslateY(250);
 
@@ -264,7 +266,7 @@ public class GraphView
      */
     protected void makeHoverHintButton()
     {
-        hoverHintButton = new Button("hover Hint");
+        hoverHintButton = new Button("Graph Coloring Assistant 2");
         hoverHintButton.setTranslateX(50);
         hoverHintButton.setTranslateY(300);
 

@@ -29,7 +29,7 @@ public class GenerateRandomGraph {
         generateAllEdges();
         readGraph();
 
-        //System.out.println("these are all possible edges:");
+        //System.out.println("these are all possible edges:" + maxPossibleEdges);
         //printColEdgeArray(graphWithAllEdges);
 
         initColEdge(randomGraph);
