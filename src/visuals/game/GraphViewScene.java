@@ -1,3 +1,7 @@
+/**
+ * this class creates the scene of the gamemodes
+ */
+
 package visuals.game;
 
 
@@ -22,8 +26,10 @@ public class GraphViewScene extends Application {
 
     private Scene graphViewScene;
     private Graph graph;
-    private static GraphicalMenu.MenuChoices menuChoices;
     private Group root;
+
+    private static GraphicalMenu.MenuChoices menuChoices;
+
 
     public GraphViewScene(GraphicalMenu.MenuChoices menuChoices)
     {
@@ -31,6 +37,10 @@ public class GraphViewScene extends Application {
         this.graph = menuChoices.getGraph();
     }
 
+
+    /**
+     * creates the scene and puts it on the stage
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Translate translate = new Translate();

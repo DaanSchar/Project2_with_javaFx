@@ -1,3 +1,9 @@
+/**
+ * This class generates a random graph with some inputs from the user
+ *
+ * @author Patrick, Felix, Daan
+ */
+
 package graph;
 
 import java.io.File;
@@ -7,11 +13,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * This class generates a random graph with some inputs from the user
- *
- * @author Patrick, Felix, Daan
- */
 
 public class GenerateRandomGraph {
 
@@ -26,16 +27,13 @@ public class GenerateRandomGraph {
         chosenEdges = edges;
         maxPossibleEdges = calcMaxEdges(vertices);
         randomGraph = new ColEdge[chosenEdges];
+
         generateAllEdges();
         readGraph();
 
-        //System.out.println("these are all possible edges:" + maxPossibleEdges);
-        //printColEdgeArray(graphWithAllEdges);
-
         initColEdge(randomGraph);
         randomGraph = pickRandom();
-        //System.out.println("the random graph generated: ");
-        //printColEdgeArray(randomGraph);
+
     }
 
     /**
@@ -60,6 +58,18 @@ public class GenerateRandomGraph {
         pw.close();
     }
 
+
+    /**
+     *
+     * graphWithAllEdges is a gameVisuals.ColEdge[] with all possible edges and is maxPossibleEdges long.
+     * chosenVertices is an int that represents the amount of vertices the player wants.
+     * chosenEdges is an int that represents the amount of Edges the player wants.
+     * now make a method/make multiple methods so that we get a gameVisuals.ColEdge[] called randomGraph
+     * that will contain chosenEdges amount of random ColEdges from graphWithAllEdges
+     *
+     */
+
+
     /**
      * turns the read file into a gameVisuals.ColEdge array.
      */
@@ -82,38 +92,6 @@ public class GenerateRandomGraph {
             return x - 1 + calcMaxEdges(x - 1);
         }
     }
-
-    /**
-     * prints out the Coledge[] array
-     *
-     * @param array
-     */
-    private void printColEdgeArray(ColEdge[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i].u + " " + array[i].v);
-        }
-    }
-
-
-    /**
-     * returns the randomly generated graph
-     *
-     * @return gameVisuals.ColEdge array randomGraph
-     */
-    public ColEdge[] getRandomGraph() {
-        return randomGraph;
-    }
-
-
-    /**
-     *
-     * graphWithAllEdges is a gameVisuals.ColEdge[] with all possible edges and is maxPossibleEdges long.
-     * chosenVertices is an int that represents the amount of vertices the player wants.
-     * chosenEdges is an int that represents the amount of Edges the player wants.
-     * now make a method/make multiple methods so that we get a gameVisuals.ColEdge[] called randomGraph
-     * that will contain chosenEdges amount of random ColEdges from graphWithAllEdges
-     *
-     */
 
 
     /**
@@ -178,4 +156,21 @@ public class GenerateRandomGraph {
 
         return randomGraph;
      }
+
+
+    /**
+     * prints out the Coledge[] array
+     */
+    private void printColEdgeArray(ColEdge[] array)
+    {
+        for (int i = 0; i < array.length; i++)
+        {
+            System.out.println(array[i].u + " " + array[i].v);
+        }
+    }
+
+    public ColEdge[] getRandomGraph()
+    {
+        return randomGraph;
+    }
 }

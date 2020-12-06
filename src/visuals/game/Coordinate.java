@@ -1,3 +1,7 @@
+/**
+ * simple coordinate class used in GraphView
+ */
+
 package visuals.game;
 
 public class Coordinate

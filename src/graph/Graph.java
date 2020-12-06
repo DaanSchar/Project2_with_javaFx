@@ -1,13 +1,13 @@
-package graph;
-
-import chromatics.branching.Branching;
-import menu.Menu;
-import visuals.menu.GraphicalMenu;
-
 /**
  * contains some usefull variables of the graph like the graph itself and the color object related to that graph.
  * @author Daan
  */
+
+package graph;
+
+import chromatics.branching.Branching;
+import visuals.menu.GraphicalMenu;
+
 
 public class Graph
 {
@@ -17,6 +17,7 @@ public class Graph
     public ColEdge[] e;
     public Colors colors;
     public int chromNum;
+
     private static int calc = 250;
 
     /**

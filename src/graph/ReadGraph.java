@@ -8,8 +8,9 @@ import java.io.IOException;
 
 /**
   * all handling of reading the graph txt files happens in the graph.ReadGraph class
+  * with some small additions
   *
-  * @Author DKE Maastricht, Daan Schar
+  * @Author DKE Maastricht
   */
 
 public class ReadGraph {

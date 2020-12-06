@@ -1,7 +1,6 @@
 /**
  * class used to make a grid where all vertices can be drawn on
  *
- * @author Daan
  */
 
 package visuals.game;
@@ -11,14 +10,16 @@ import graph.Graph;
 public class Grid
 {
 
+    private String[] gridPositions;
+
     private int h;
     private int v;
-    private String[] gridPositions;
+    private int n;
+
     private int totalGridPositions;
     private int gridScale;
     private int sideMenuSize;
     private int topMenuSize;
-    private int n;
 
     public Grid(int horizontalPixels, int verticalPixels, Graph graph)
     {
@@ -41,6 +42,10 @@ public class Grid
         shuffle();
     }
 
+
+    /**
+     * determines the grid scale depending on how many vertices the graph contains
+     */
     private void scaleGrid()
     {
         if(n < 10)
@@ -101,16 +106,16 @@ public class Grid
      * makes a "grid pattern". it generates all possible positions for a vertex to be placed and adds it to
      * gridPositions.
      */
-    private void makeGrid()
-    {
+    private void makeGrid() {
         int k = 0;
 
         while (k < (totalGridPositions))
         {
             for (int i = 1; i <= h; i++)
+            {
                 for (int j = 1; j <= v; j++)
                 {
-                    if((i%gridScale == 0) && (j%gridScale == 0))
+                    if ((i % gridScale == 0) && (j % gridScale == 0))
                     {
                         gridPositions[k] = String.valueOf(i + sideMenuSize) + " " + String.valueOf(j + topMenuSize);
                         k++;
@@ -118,16 +123,6 @@ public class Grid
                 }
             }
         }
-
-
-
-    /**
-     * @return total gridPositions
-     * if this value is smaller than the total vertices of a graph, the graph will not be able to generate
-     */
-    public int getTotalGridPositions()
-    {
-        return totalGridPositions;
     }
 
 

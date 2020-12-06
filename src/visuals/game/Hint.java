@@ -1,9 +1,12 @@
+/**
+ * this class creates the hint function of calculating which set of vertices need to be
+ * colored the chromatic number and which set of vertices need to be colored the smallest color
+ */
+
 package visuals.game;
 
-import chromatics.branching.Branching;
 import chromatics.branching.ChromaticNum;
 import chromatics.branching.Coloring;
-import graph.ColEdge;
 import graph.Colors;
 import graph.Graph;
 
@@ -12,8 +15,6 @@ import java.util.Random;
 public class Hint
 {
     private Graph graph;
-    private Colors colorsCopy;
-    private int[] chromArray;
 
     // this graph object contains the same values as graph, but an empty color object
     private Graph emptyGraph;
@@ -39,17 +40,9 @@ public class Hint
     }
 
 
-
-
-
     private void calculate()
     {
-
-        int calc = 10;
         int[] vertexPath = new int[graph.n];
-        chromArray = new int[calc];
-
-
 
         //loop to create template vertexpath, so {1,2,3,...,n}
         for(int i = 0; i < graph.n; i++)
@@ -71,7 +64,6 @@ public class Hint
             Colors colors = coloring.getColorOfColoringObject();
 
             ChromaticNum chromatic = new ChromaticNum(colors.getColorArray());
-            //chromArray[i] = chromatic.getChromNum();
 
             // if the calculated chromatic number is equal to the chromatic number of the graph calculated previously
             if(chromatic.getChromNum() == graph.getChromNum())
