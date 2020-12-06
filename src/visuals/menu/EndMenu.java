@@ -1,11 +1,16 @@
 package visuals.menu;
 
+/**
+ * class that makes menu that appears after the game has ended
+ * displays results and highscore and asks the user whether to play again or quit the game
+ * @author Felix & Leo
+ */
+
 import Main.Main;
 import graph.Graph;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,12 +20,6 @@ import javafx.stage.Stage;
 import menu.ScoreData;
 import visuals.game.*;
 
-import java.awt.event.ActionEvent;
-
-/**
- * displays results and asks user for the next steps
- *
- */
 
 public class EndMenu extends Application {
 
@@ -131,6 +130,10 @@ public class EndMenu extends Application {
 
     }
 
+    /**
+     * make VBox containing results for gamemode 1
+     * @return resBox results
+     */
     private VBox results1()
     {
         resultLabel1 = new Label();
@@ -159,6 +162,10 @@ public class EndMenu extends Application {
         return resBox;
     }
 
+    /**
+     * make VBox containing results for gamemode 2
+     * @return resBox results
+     */
     private VBox results2()
     {
         resultLabel1 = new Label();
@@ -187,6 +194,10 @@ public class EndMenu extends Application {
         return resBox;
     }
 
+    /**
+     * make VBox containing results for gamemode 3
+     * @return resBox results
+     */
     private VBox results3()
     {
         resultLabel1 = new Label();
@@ -215,11 +226,9 @@ public class EndMenu extends Application {
         return resBox;
     }
 
-    private void exitProgram()
-    {
-        System.out.println("Goodbye!");
-        //  endMenuScene.close();
-    }
+    /**
+     * starts new graphicalMenu -> user goes back to main menu
+     */
     private void goToMainMenu()
     {
         System.out.println("Going to Main Menu!");
@@ -232,6 +241,9 @@ public class EndMenu extends Application {
         stage.setScene(menu.getMenuScene());
     }
 
+    /**
+     * starts new GraphviewScene with the same parameters -> runs game with the same parameters
+     */
     private void rerunProgram()
     {
         System.out.println("Rerunning");

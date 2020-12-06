@@ -1,7 +1,5 @@
 package visuals.game;
 
-//import menu.ScoreData;
-
 import menu.ScoreData;
 
 public class Results
@@ -40,10 +38,6 @@ public class Results
         return playTime;
     }
 
-    /*public int getLevel()
-    {
-
-    }*/
 
     public int getGamemode()
     {

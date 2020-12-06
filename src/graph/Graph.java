@@ -1,5 +1,5 @@
 /**
- * contains some usefull variables of the graph like the graph itself and the color object related to that graph.
+ * contains some useful variables of the graph like the graph itself and the color object related to that graph.
  * @author Daan
  */
 

@@ -212,7 +212,7 @@ public class GraphView
     }
 
     /**
-     * functionailty that shows which vertices should be colored with the smallest number in the array of used colors
+     * functionality that shows which vertices should be colored with the smallest number in the array of used colors
      * = usually 1
      */
     public void makeSmallestHintButton()

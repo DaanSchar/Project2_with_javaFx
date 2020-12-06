@@ -1,5 +1,10 @@
 package visuals.menu;
 
+/**
+ * class that makes the GUI for the menu, where the user can choose gamemode settings
+ * @author Harry, Dimitrina
+ */
+
 import graph.ColEdge;
 import graph.GenerateRandomGraph;
 import graph.Graph;

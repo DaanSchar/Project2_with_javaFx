@@ -27,6 +27,18 @@ public class RandomPath
     }
 
     /**
+     * randomizes contents of vertexPath
+     * @return randomPath
+     */
+    public int [] makeRandomPath()
+    {
+        makePath(max);
+        int[] newRandomPath = shuffle(vertexPath);
+        randomPath = newRandomPath;
+        return randomPath;
+    }
+
+    /**
      * store vertices of a graph in vertexPath
      */
 
@@ -43,39 +55,26 @@ public class RandomPath
 
     /**
      * implements Fisher-Yates shuffle
+     * @param vertexPath array containing all vertices of the graph
+     * @return shuffledVertexPath
      */
 
-    public int [] shuffle (int [] array)
+    public int [] shuffle (int [] vertexPath)
     {
         Random random = new Random();
 
-        for (int i = array.length-1; i > 0; i--)
+        for (int i = vertexPath.length-1; i > 0; i--)
         {
             int index = random.nextInt(i+1);
 
-            int temp = array[i];
-            array[i] = array[index];
-            array[index] = temp;
+            int temp = vertexPath[i];
+            vertexPath[i] = vertexPath[index];
+            vertexPath[index] = temp;
         }
-        return array;
+        int [] shuffledVertexPath = vertexPath;
+        return shuffledVertexPath;
     }
 
-    /**
-     * randomizes contents of vertexPath
-     * @return randomPath
-     */
-    public int [] makeRandomPath()
-    {
-        makePath(max);
-        int[] newRandomPath = shuffle(vertexPath);
-        randomPath = newRandomPath;
-        return randomPath;
-    }
-
-    public int[] getVertexPath()
-    {
-        return vertexPath;
-    }
 
     public int[] getRandomPath()
     {
