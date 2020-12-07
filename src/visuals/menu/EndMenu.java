@@ -1,10 +1,11 @@
-package visuals.menu;
-
 /**
  * class that makes menu that appears after the game has ended
  * displays results and highscore and asks the user whether to play again or quit the game
  * @author Felix & Leo
  */
+
+
+package visuals.menu;
 
 import Main.Main;
 import graph.Graph;
@@ -29,6 +30,7 @@ public class EndMenu extends Application {
     private Label resultLabel3;
     private Label resultLabel4;
     private Label resultLabel5;
+    private Label headLabel;
 
     private Graph graph;
     private Stage stage;
@@ -74,46 +76,40 @@ public class EndMenu extends Application {
         buttonBox.setLayoutX(15);
         buttonBox.setLayoutY(35);
 
-        //make labels
+        //make resultLabels
+        headLabel = new Label();
+        headLabel.setTextFill(Color.WHITE);
+        headLabel.setText("Game over");
         resultLabel1 = new Label();
-        resultLabel2 = new Label();
-        resultLabel3 = new Label();
-        resultLabel4 = new Label();
-        resultLabel5 = new Label();
-
-        //set text
-        resultLabel1.setText("Game Over");
         resultLabel1.setTextFill(Color.WHITE);
-
-        resultLabel2.setText("You used " + results.getNumberOfColors() + " colors");
+        resultLabel2 = new Label();
         resultLabel2.setTextFill(Color.WHITE);
-
-        resultLabel3.setText("The chromatic number for this graph is " + results.getChromNum());
+        resultLabel3 = new Label();
         resultLabel3.setTextFill(Color.WHITE);
-
-        resultLabel4.setText("It took you  " + results.getPlayTime() + " seconds");
+        resultLabel4 = new Label();
         resultLabel4.setTextFill(Color.WHITE);
+        resultLabel5 = new Label();
+        resultLabel5.setTextFill(Color.WHITE);
+
+        //make resultBox
+        VBox resBox = new VBox(20);
+        resBox.setPrefWidth(500);
+        resBox.setLayoutX(15);
+        resBox.setLayoutY(35);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4, resultLabel5);
 
         if(results.getGamemode() == 1)
         {
-            resultLabel5.setText("Your highscore is " + scores.getHighScore1());
+            results1();
         }
         else if(results.getGamemode() == 2)
         {
-            resultLabel5.setText("Your highscore is not processed yet");
+            results2();
         }
         else if(results.getGamemode() == 3)
         {
-            resultLabel5.setText("Your highscore is " + scores.getHighScore3());
+            results3();
         }
-        resultLabel5.setTextFill(Color.WHITE);
-
-        //make VBox containing labels
-        VBox resBox = new VBox(20);
-        resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4, resultLabel5);
-        resBox.setLayoutX(15);
-        resBox.setLayoutY(35);
 
         //putting it together
         VBox menuBox = new VBox(20);
@@ -131,99 +127,54 @@ public class EndMenu extends Application {
     }
 
     /**
-     * make VBox containing results for gamemode 1
-     * @return resBox results
+     * setting results for gamemode 1
      */
-    private VBox results1()
+    private void results1()
     {
-        resultLabel1 = new Label();
-        resultLabel2 = new Label();
-        resultLabel3 = new Label();
-        resultLabel4 = new Label();
+        resultLabel1.setText("You used " + results.getNumberOfColors() + " colors");
 
-        resultLabel1.setText("Game Over");
-        resultLabel1.setTextFill(Color.WHITE);
+        resultLabel2.setText("The chromatic number for this graph is " + results.getChromNum());
 
-        resultLabel2.setText("You used " + results.getNumberOfColors() + " colors");
-        resultLabel2.setTextFill(Color.WHITE);
+        resultLabel3.setText("It took you  " + results.getPlayTime() + " seconds");
 
-        resultLabel3.setText("The chromatic number for this graph is " + results.getChromNum());
-        resultLabel3.setTextFill(Color.WHITE);
+        resultLabel4.setText("Your score: " + results.getScore());
 
-        resultLabel4.setText("It took you  " + results.getPlayTime() + " seconds");
-        resultLabel4.setTextFill(Color.WHITE);
+        resultLabel5.setText(("This is your highscore " + scores.getHighScore1()));
 
-        VBox resBox = new VBox(20);
-        resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4);
-        resBox.setLayoutX(15);
-        resBox.setLayoutY(35);
-
-        return resBox;
     }
 
     /**
-     * make VBox containing results for gamemode 2
-     * @return resBox results
+     * setting results for gamemode 2
      */
-    private VBox results2()
+    private void results2()
     {
-        resultLabel1 = new Label();
-        resultLabel2 = new Label();
-        resultLabel3 = new Label();
-        resultLabel4 = new Label();
+        resultLabel1.setText("You used " + results.getNumberOfColors() + " colors");
 
-        resultLabel1.setText("Game Over");
-        resultLabel1.setTextFill(Color.WHITE);
+        resultLabel2.setText("The chromatic number for this graph is " + results.getChromNum());
 
-        resultLabel2.setText("You used " + results.getNumberOfColors() + " colors");
-        resultLabel2.setTextFill(Color.WHITE);
+        resultLabel3.setText("It took you  " + results.getPlayTime() + " seconds");
 
-        resultLabel3.setText("The chromatic number for this graph is " + results.getChromNum());
-        resultLabel3.setTextFill(Color.WHITE);
+        resultLabel4.setText("Your score: " + results.getScore());
 
-        resultLabel4.setText("It took you  " + results.getPlayTime() + " seconds");
-        resultLabel4.setTextFill(Color.WHITE);
+        resultLabel5.setText(("This is your highscore " + scores.getHighScore2()));
 
-        VBox resBox = new VBox(20);
-        resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4);
-        resBox.setLayoutX(15);
-        resBox.setLayoutY(35);
-
-        return resBox;
     }
 
     /**
-     * make VBox containing results for gamemode 3
-     * @return resBox results
+     * setting results for gamemode 3
      */
-    private VBox results3()
+    private void results3()
     {
-        resultLabel1 = new Label();
-        resultLabel2 = new Label();
-        resultLabel3 = new Label();
-        resultLabel4 = new Label();
+        resultLabel1.setText("You used " + results.getNumberOfColors() + " colors");
 
-        resultLabel1.setText("Game Over");
-        resultLabel1.setTextFill(Color.WHITE);
+        resultLabel2.setText("The chromatic number for this graph is " + results.getChromNum());
 
-        resultLabel2.setText("You used " + results.getNumberOfColors() + " colors");
-        resultLabel2.setTextFill(Color.WHITE);
+        resultLabel3.setText("It took you  " + results.getPlayTime() + " seconds");
 
-        resultLabel3.setText("The chromatic number for this graph is " + results.getChromNum());
-        resultLabel3.setTextFill(Color.WHITE);
+        resultLabel4.setText("Your score: " + results.getScore());
 
-        resultLabel4.setText("It took you  " + results.getPlayTime() + " seconds");
-        resultLabel4.setTextFill(Color.WHITE);
+        resultLabel5.setText(("This is your highscore: " + scores.getHighScore3()));
 
-        VBox resBox = new VBox(20);
-        resBox.setPrefWidth(500);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2,resultLabel3,resultLabel4);
-        resBox.setLayoutX(15);
-        resBox.setLayoutY(35);
-
-        return resBox;
     }
 
     /**
@@ -256,6 +207,7 @@ public class EndMenu extends Application {
         }
         stage.setScene(graphViewScene.getGraphViewScene());
     }
+
 
     public Scene getEndMenuScene()
     {

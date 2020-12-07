@@ -45,7 +45,7 @@ public class GameMode1 extends GraphView{
     {
         playTime = (System.currentTimeMillis() - startTime) / 1000;
 
-        Results results = new Results(1, colors.numberOfColors(), graph.getChromNum(), playTime);
+        Results results = new Results(1, colors.numberOfColors(), graph.getChromNum(), playTime, graph);
         //ScoreData.add(results);
 
         EndMenu endMenu = new EndMenu(stage, graph, results);

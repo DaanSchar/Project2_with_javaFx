@@ -249,7 +249,7 @@ public class GameMode3 extends GraphView{
         playTime = (System.currentTimeMillis() - startTime) / 1000;
 
         //make results object
-        Results results = new Results(3, colors.numberOfColors(), graph.getChromNum(), playTime);
+        Results results = new Results(3, colors.numberOfColors(), graph.getChromNum(), playTime, graph);
 
         //call endMenu
         EndMenu endMenu = new EndMenu(stage, graph, results);

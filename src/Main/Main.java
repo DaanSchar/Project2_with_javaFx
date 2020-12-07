@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import menu.ScoreData;
+
 import visuals.menu.GraphicalMenu;
 
 
@@ -34,7 +34,6 @@ public class Main extends Application
     @Override
     public void start(Stage stage) throws Exception {
 
-        ScoreData scores = new ScoreData();
         GraphicalMenu menu = new GraphicalMenu();
         menu.start(stage);
         Scene menuScene = menu.getMenuScene();

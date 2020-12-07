@@ -106,7 +106,7 @@ public class GameMode2 extends GraphView {
 
         playTime = (System.currentTimeMillis() - startTime) / 1000;
 
-        Results results = new Results(2, colors.numberOfColors(), graph.getChromNum(), playTime);
+        Results results = new Results(2, colors.numberOfColors(), graph.getChromNum(), playTime, graph);
 
         EndMenu endMenu = new EndMenu(stage, graph, results);
         stage.setScene(endMenu.getEndMenuScene());
@@ -122,7 +122,7 @@ public class GameMode2 extends GraphView {
 
         playTime = (System.currentTimeMillis() - startTime) / 1000;
 
-        Results results = new Results(2, colors.numberOfColors(), graph.getChromNum(), playTime);
+        Results results = new Results(2, colors.numberOfColors(), graph.getChromNum(), playTime, graph);
 
         EndMenu endMenu = new EndMenu(stage, graph, results);
         stage.setScene(endMenu.getEndMenuScene());

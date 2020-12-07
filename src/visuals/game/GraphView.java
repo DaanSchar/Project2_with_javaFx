@@ -1,7 +1,7 @@
 /**
  * class that draws the graph and makes it interactable
  *
- * @author Daan, Leo
+ * @author Daan & Leo
  */
 
 package visuals.game;
@@ -33,7 +33,8 @@ public class GraphView
     protected int n;
     protected int m;
 
-    protected Label hintLabel;
+    protected Label hintLabel1;
+    protected Label hintLabel2;
     protected Label resultLabel1;
     protected Label resultLabel2;
 
@@ -75,6 +76,7 @@ public class GraphView
     protected Button checkButton;
 
     protected VBox resBox;
+    protected VBox hintBox;
 
 
     /**
@@ -106,12 +108,25 @@ public class GraphView
         needWarningList = new Boolean[m];
         vertexCount = 0;
 
+        hintLabel1 = new Label();
+        hintLabel2 = new Label();
+        hintLabel1.setTextFill(Color.LIGHTGRAY);
+        hintLabel2.setTextFill(Color.LIGHTGRAY);
+        hintBox = new VBox(20);
+        hintBox.setPrefWidth(500);
+        hintBox.setLayoutX(15);
+        hintBox.setLayoutY(350);
+        hintBox.getChildren().addAll(hintLabel1, hintLabel2);
+
         resultLabel1 = new Label();
         resultLabel2 = new Label();
+        resultLabel1.setTextFill(Color.LIGHTGRAY);
+        resultLabel2.setTextFill(Color.LIGHTGRAY);
         resBox = new VBox(20);
         resBox.setPrefWidth(500);
         resBox.setLayoutX(15);
-        resBox.setLayoutY(350);
+        resBox.setLayoutY(450);
+        resBox.getChildren().addAll(resultLabel1,resultLabel2);
 
         makeLineColorList();
         scaleButtons();
@@ -128,11 +143,8 @@ public class GraphView
         makeHoverHintButton();
         makeQuickHintButton();
 
-        root.getChildren().add(resBox);
-        hintLabel.setTextFill(Color.LIGHTGRAY);
-        resultLabel1.setTextFill(Color.LIGHTGRAY);
-        resultLabel2.setTextFill(Color.LIGHTGRAY);
-        resBox.getChildren().addAll(resultLabel1,resultLabel2, hintLabel);
+        root.getChildren().addAll(hintBox, resBox);
+
     }
 
     /**
@@ -191,11 +203,9 @@ public class GraphView
     public void makeLargestHintButton()
     {
         Button largestHintButton = new Button();
-        largestHintButton.setText("largest color Hint");
+        largestHintButton.setText("I need some help");
         largestHintButton.setTranslateX(50);
         largestHintButton.setTranslateY(150);
-
-        hintLabel = new Label();
 
         largestHintButton.setOnAction(actionEvent ->
         {
@@ -204,7 +214,7 @@ public class GraphView
 
             System.out.println("printing largest numbers");
 
-            hintLabel.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+            hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
 
         });
 
@@ -218,11 +228,9 @@ public class GraphView
     public void makeSmallestHintButton()
     {
         Button smallestHintButton = new Button();
-        smallestHintButton.setText("smallest color Hint");
+        smallestHintButton.setText("I really need some help");
         smallestHintButton.setTranslateX(50);
         smallestHintButton.setTranslateY(200);
-
-        hintLabel = new Label();
 
         smallestHintButton.setOnAction(actionEvent ->
         {
@@ -230,7 +238,7 @@ public class GraphView
 
             System.out.println("printing smallest numbers");
 
-            hintLabel.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
+            hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
         });
 
         root.getChildren().add(smallestHintButton);
@@ -242,7 +250,7 @@ public class GraphView
      */
     protected void makeLineHintButton()
     {
-        lineHintButton = new Button("Line Hint");
+        lineHintButton = new Button("Graph coloring assistant 1");
         lineHintButton.setTranslateX(50);
         lineHintButton.setTranslateY(250);
 
@@ -262,7 +270,7 @@ public class GraphView
      */
     protected void makeHoverHintButton()
     {
-        hoverHintButton = new Button("hover Hint");
+        hoverHintButton = new Button("Graph coloring assistant 2");
         hoverHintButton.setTranslateX(50);
         hoverHintButton.setTranslateY(300);
 
