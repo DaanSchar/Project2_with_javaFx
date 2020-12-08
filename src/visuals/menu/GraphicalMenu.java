@@ -27,10 +27,6 @@ public class GraphicalMenu extends Application {
 
     public static MenuChoices MENU_CHOICES = null;
     private Scene scene;
-    private Graph graph;
-    private ColEdge[] e;
-    private int n;
-    private int m;
     public static Stage stage;
 
     @Override
@@ -41,7 +37,6 @@ public class GraphicalMenu extends Application {
         // gamemode
         ChoiceBox<String> gameMode = new ChoiceBox<>(FXCollections.observableArrayList("To the end",
                 "Timed best attempt", "Random order coloring"));
-
         Button accept = new Button();
         accept.setText("Accept");
         Text gameModeText = new Text("Select the gamemode");
