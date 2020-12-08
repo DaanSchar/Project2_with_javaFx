@@ -205,6 +205,7 @@ public class EndMenu extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         stage.setScene(graphViewScene.getGraphViewScene());
     }
 

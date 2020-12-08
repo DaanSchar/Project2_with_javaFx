@@ -224,11 +224,11 @@ public class GraphView
                 System.out.println("printing largest numbers");
 
                 hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+
+                HintsUsed.largestHintUsed = true;
             } else {
                 hintLabel1.setText("Give it a shot first before trying the hint");
             }
-
-            HintsUsed.largestHintUsed = true;
 
         });
 
@@ -278,12 +278,12 @@ public class GraphView
                 System.out.println("printing smallest numbers");
 
                 hintLabel2.setText("These vertices should be colored with the smallest color:\n" + Arrays.toString(hint.getSmallestColorVertices()));
+
+                HintsUsed.smallestHintUsed = true;
+
             } else {
                 hintLabel2.setText("Give it a shot first");
             }
-            hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
-
-            HintsUsed.smallestHintUsed = true;
 
         });
 
