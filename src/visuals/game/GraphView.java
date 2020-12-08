@@ -20,7 +20,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
-import menu.ScoreData;
 
 import java.util.Arrays;
 import java.util.Random;
