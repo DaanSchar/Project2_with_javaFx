@@ -327,7 +327,7 @@ public class GraphView
         initCircles();
 
         currentVertex = new Text();
-        currentVertex.setText(b.getText());
+        currentVertex.setText("vertex: " + b.getText() + "\nColor: "  + colors.getColorOfVertex(Integer.parseInt(b.getText())));
         currentVertex.setY(55);
         currentVertex.setX(95);
         currentVertex.setFill(Color.WHITE);
@@ -372,7 +372,9 @@ public class GraphView
         textForButtonHover = Integer.parseInt(b.getText());
 
         //removes the text
-        root.getChildren().remove(currentVertex);
+        currentVertex.setText("vertex: " + "\nColor: ");
+
+
 
         if(hoverHintPressed)
         {
