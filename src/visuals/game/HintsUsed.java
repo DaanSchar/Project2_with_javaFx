@@ -12,9 +12,14 @@ public class HintsUsed {
     public static boolean smallestHintUsed;
     public static boolean largestHintUsed;
 
-    public HintsUsed()
-    {
 
+    public static void reset()
+    {
+        lineHintUsed = false;
+        hoverHintUsed = false;
+        smallestHintUsed = false;
+        largestHintUsed = false;
     }
+
 
 }
