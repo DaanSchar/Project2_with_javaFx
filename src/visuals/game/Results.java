@@ -122,29 +122,17 @@ public class Results
               aScore = (score - (score * 0.2));
               score = (int) aScore;
         }
-        else if(HintsUsed.hoverHintUsed == true && HintsUsed.largestHintUsed)
+        else if(HintsUsed.hoverHintUsed == true && HintsUsed.largestHintUsed || HintsUsed.lineHintUsed == true && HintsUsed.largestHintUsed)
         {
-             System.out.println("hover hint used & largest hint used");
+             System.out.println("hover/line hint used & largest hint used");
              aScore = (score - (score * 0.3));
              score = (int) aScore;
         }
-        else if(HintsUsed.lineHintUsed == true && HintsUsed.largestHintUsed)
+        else if(HintsUsed.hoverHintUsed == true && HintsUsed.smallestHintUsed == true || HintsUsed.lineHintUsed == true && HintsUsed.smallestHintUsed == true)
         {
-            System.out.println("line hint used & largest hint used");
-            aScore = (score - (score * 0.3));
-            score = (int) aScore;
-        }
-        else if(HintsUsed.hoverHintUsed == true && HintsUsed.smallestHintUsed == true)
-        {
-            System.out.println("hover hint used & smallest hint used");
+            System.out.println("hover / line hint used & smallest hint used");
             aScore = (score - (score * 0.4));
             score = (int) aScore;
-        }
-        else if(HintsUsed.lineHintUsed == true && HintsUsed.smallestHintUsed == true)
-        {
-             System.out.println("line hint used & smallest hint used");
-             aScore = (score - (score * 0.4));
-             score = (int) aScore;
         }
         else if(HintsUsed.smallestHintUsed && HintsUsed.largestHintUsed)
         {
