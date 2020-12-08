@@ -20,6 +20,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
+import menu.ScoreData;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -239,6 +240,8 @@ public class GraphView
             System.out.println("printing smallest numbers");
 
             hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
+
+            ScoreData.remove(0.3);
         });
 
         root.getChildren().add(smallestHintButton);

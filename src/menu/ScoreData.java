@@ -122,6 +122,13 @@ public class ScoreData {
         }
     }
 
+    public static void remove(double amount)
+    {
+
+
+
+    }
+
     public static int getHighScore1()
     {
         return highScore1;
