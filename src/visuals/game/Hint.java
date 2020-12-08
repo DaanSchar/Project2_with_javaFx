@@ -34,9 +34,11 @@ public class Hint
         emptyGraph.n = graph.n;
         emptyGraph.m = graph.m;
 
+
         calculate();
         makeSmallestColorVertices();
         makeLargestColorVertices();
+
     }
 
 
@@ -72,8 +74,6 @@ public class Hint
                 // giving the color object of the the coloring class to the empty graph
                 emptyGraph.colors = coloring.getColorOfColoringObject();
 
-                System.out.println("chroms are the same!");
-
 
                 // measuring how many vertices haven't been colored yet by the user(color = 0)
                 int nonColored = 0;
@@ -84,8 +84,6 @@ public class Hint
                         nonColored++;
                     }
                 }
-                System.out.println("nonColored = " + nonColored);
-
 
                 int totalColored = 0;
 

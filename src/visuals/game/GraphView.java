@@ -210,15 +210,36 @@ public class GraphView
         largestHintButton.setOnAction(actionEvent ->
         {
 
-            Hint hint = new Hint(graph);
+            if(!isNotColored()) {
+                Hint hint = new Hint(graph);
 
-            System.out.println("printing largest numbers");
+                System.out.println("printing largest numbers");
 
-            hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+                hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
+            } else {
+                hintLabel1.setText("Give it a shot first before trying the hint");
+            }
 
         });
 
         root.getChildren().add(largestHintButton);
+    }
+
+    /**
+     *  checks if the graph has no colored vertices
+     */
+    private boolean isNotColored()
+    {
+        for(int i = 0; i < graph.getN(); i++)
+        {
+            if(graph.getColor().getColorOfVertex(i+1) != 0)
+            {
+                System.out.println("returning false");
+                return false;
+            }
+        }
+        System.out.println("returning true again");
+        return true;
     }
 
     /**
@@ -234,11 +255,15 @@ public class GraphView
 
         smallestHintButton.setOnAction(actionEvent ->
         {
-            Hint hint = new Hint(graph);
+            if(!isNotColored()) {
+                Hint hint = new Hint(graph);
 
-            System.out.println("printing smallest numbers");
+                System.out.println("printing smallest numbers");
 
-            hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
+                hintLabel2.setText("These vertices should be colored with the smallest color:\n" + Arrays.toString(hint.getSmallestColorVertices()));
+            } else {
+                hintLabel2.setText("Give it a shot first");
+            }
         });
 
         root.getChildren().add(smallestHintButton);
