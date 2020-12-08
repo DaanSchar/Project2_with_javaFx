@@ -210,7 +210,14 @@ public class GraphView
         largestHintButton.setOnAction(actionEvent ->
         {
 
-            if(!isNotColored()) {
+            if(!isNotColored())
+            {
+                // looks for illegal colorings by the user
+                if(checkIfNeedWarning())
+                {
+                  hintLabel1.setText("You have illegal colors in your graph\nbe sure that this is not the case when\nreferring to this hint");
+                  return;
+                }
                 Hint hint = new Hint(graph);
 
                 System.out.println("printing largest numbers");
@@ -255,7 +262,14 @@ public class GraphView
 
         smallestHintButton.setOnAction(actionEvent ->
         {
-            if(!isNotColored()) {
+            if(!isNotColored())
+            {
+                // looks for illegal colorings by the user
+                if(checkIfNeedWarning())
+                {
+                    hintLabel2.setText("You have illegal colors in your graph\nbe sure that this is not the case when\nreferring to this hint");
+                    return;
+                }
                 Hint hint = new Hint(graph);
 
                 System.out.println("printing smallest numbers");
