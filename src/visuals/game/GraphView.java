@@ -217,6 +217,8 @@ public class GraphView
 
             hintLabel1.setText("These vertices should be colored the largest color:\n" + Arrays.toString(hint.getLargestColorVertices()));
 
+            HintsUsed.largestHintUsed = true;
+
         });
 
         root.getChildren().add(largestHintButton);
@@ -241,7 +243,8 @@ public class GraphView
 
             hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
 
-            ScoreData.remove(0.3);
+            HintsUsed.smallestHintUsed = true;
+
         });
 
         root.getChildren().add(smallestHintButton);
@@ -262,6 +265,7 @@ public class GraphView
         lineHintButton.setOnAction(e ->
         {
             lineHintPressed = true;
+            HintsUsed.lineHintUsed = true;
         });
 
         root.getChildren().add(lineHintButton);
@@ -282,6 +286,7 @@ public class GraphView
         hoverHintButton.setOnAction(e ->
         {
             hoverHintPressed = true;
+            HintsUsed.hoverHintUsed = true;
             checkForFaults();
         });
 

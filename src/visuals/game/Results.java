@@ -31,6 +31,7 @@ public class Results
         this.graph = graph;
 
         makeScore();
+        checkForHints();
         addScore();
 
     }
@@ -106,6 +107,39 @@ public class Results
     public void addScore()
     {
         scores.add(gamemode,score);
+    }
+
+    public static void checkForHints()
+    {
+        double aScore;
+
+        if(HintsUsed.hoverHintUsed == true)
+        {
+            System.out.println("hover hint used");
+            aScore = (score - (score * 0.1));
+            score = (int) aScore;
+        }
+        else if(HintsUsed.lineHintUsed == true)
+        {
+            System.out.println("line hint used");
+            aScore = score - (score * 0.1);
+            score = (int) aScore;
+        }
+        else if(HintsUsed.largestHintUsed)
+        {
+            System.out.println("largest hint used");
+            aScore = score - (score * 0.2);
+            score = (int) aScore;
+        }
+        else if(HintsUsed.smallestHintUsed)
+        {
+            System.out.println("smallest hint used");
+            aScore = score - (score * 0.3);
+            score = (int) aScore;
+        }
+        else{
+            score = score;
+        }
     }
 
     public int getNumberOfColors()
