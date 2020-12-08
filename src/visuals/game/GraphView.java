@@ -20,6 +20,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
+import menu.ScoreData;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -227,6 +228,8 @@ public class GraphView
                 hintLabel1.setText("Give it a shot first before trying the hint");
             }
 
+            HintsUsed.largestHintUsed = true;
+
         });
 
         root.getChildren().add(largestHintButton);
@@ -278,6 +281,10 @@ public class GraphView
             } else {
                 hintLabel2.setText("Give it a shot first");
             }
+            hintLabel2.setText("These vertices should be colored with the smallest color:\n" +  Arrays.toString(hint.getSmallestColorVertices()));
+
+            HintsUsed.smallestHintUsed = true;
+
         });
 
         root.getChildren().add(smallestHintButton);
@@ -298,6 +305,7 @@ public class GraphView
         lineHintButton.setOnAction(e ->
         {
             lineHintPressed = true;
+            HintsUsed.lineHintUsed = true;
         });
 
         root.getChildren().add(lineHintButton);
@@ -318,6 +326,7 @@ public class GraphView
         hoverHintButton.setOnAction(e ->
         {
             hoverHintPressed = true;
+            HintsUsed.hoverHintUsed = true;
             checkForFaults();
         });
 
