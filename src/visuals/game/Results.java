@@ -38,8 +38,8 @@ public class Results
     /**
      * calclulates score that was achieved depending on gamemode
      * relevant parameters playTime, diff
-     * gamemode1: score = 1/playtime * graph.m * 1000
-     * gamemode2: score = 1/diff^2 * 1000 (1000 bonus if chromNum is reached, 1500 penalty if illegal coloring included)
+     * gamemode1: score = 1/playtime * graph.m * 10000
+     * gamemode2: score = 1/diff^2 * 1000 (1000 bonus if chromNum is reached, /2 if illegal colorings)
      * gamemode3: same as gamemode2
      */
     public static void makeScore()
@@ -48,7 +48,8 @@ public class Results
 
         if(gamemode == 1)
         {
-            aScore = ((1/playTime) * graph.m) * 3000;
+            double res = Math.pow(playTime,2);
+            aScore = ((1/res) * graph.m) * 100000;
             score = (int) aScore;
         }
         else if(gamemode == 2)
@@ -62,13 +63,13 @@ public class Results
             }
             else if(diff < 0)
             {
-                int res = (int) Math.pow(diff, 2);
-                aScore = (((1/res) * graph.m) * 1000 - 2000);
+                double res = Math.pow(diff, 2);
+                aScore = (((1/res) * graph.m) * 1000)/2;
                 score = (int) aScore;
             }
             else if(diff>0)
             {
-                int res = (int) Math.pow(diff, 2);
+                double res = Math.pow(diff, 2);
                 aScore = (((1/res) * graph.m) * 1000);
                 score = (int) aScore;
             }
@@ -85,13 +86,13 @@ public class Results
             }
             else if(diff < 0)
             {
-                int res = (int) Math.pow(diff, 2);
-                aScore = (((1/res) * graph.m) * 1000 - 1500);
+                double res = Math.pow(diff, 2);
+                aScore = (((1/res) * graph.m) * 1000)/2;
                 score = (int) aScore;
             }
             else if(diff>0)
             {
-                int res = (int) Math.pow(diff, 2);
+                double res = Math.pow(diff, 2);
                 aScore = (((1/res) * graph.m) * 1000);
                 score = (int) aScore;
             }
