@@ -258,8 +258,9 @@ public class GraphView
 
         smallestHintButton.setOnAction(actionEvent ->
         {
+            Hint hint = new Hint(graph);
+
             if(!isNotColored()) {
-                Hint hint = new Hint(graph);
 
                 System.out.println("printing smallest numbers");
 

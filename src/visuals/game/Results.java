@@ -109,11 +109,50 @@ public class Results
         scores.add(gamemode,score);
     }
 
+    /**
+     * checks which hints have been used and subtracts penalty points from the score
+     */
     public static void checkForHints()
     {
         double aScore;
 
-        if(HintsUsed.hoverHintUsed == true)
+        if(HintsUsed.hoverHintUsed == true && HintsUsed.lineHintUsed == true)
+        {
+              System.out.println("hover hint used & line hint used");
+              aScore = (score - (score * 0.2));
+              score = (int) aScore;
+        }
+        else if(HintsUsed.hoverHintUsed == true && HintsUsed.largestHintUsed)
+        {
+             System.out.println("hover hint used & largest hint used");
+             aScore = (score - (score * 0.3));
+             score = (int) aScore;
+        }
+        else if(HintsUsed.lineHintUsed == true && HintsUsed.largestHintUsed)
+        {
+            System.out.println("line hint used & largest hint used");
+            aScore = (score - (score * 0.3));
+            score = (int) aScore;
+        }
+        else if(HintsUsed.hoverHintUsed == true && HintsUsed.smallestHintUsed == true)
+        {
+            System.out.println("hover hint used & smallest hint used");
+            aScore = (score - (score * 0.4));
+            score = (int) aScore;
+        }
+        else if(HintsUsed.lineHintUsed == true && HintsUsed.smallestHintUsed == true)
+        {
+             System.out.println("line hint used & smallest hint used");
+             aScore = (score - (score * 0.4));
+             score = (int) aScore;
+        }
+        else if(HintsUsed.smallestHintUsed && HintsUsed.largestHintUsed)
+        {
+            System.out.println("smallest hint used & largest hint used");
+            aScore = (score - (score * 0.5));
+            score = (int) aScore;
+        }
+        else if(HintsUsed.hoverHintUsed == true)
         {
             System.out.println("hover hint used");
             aScore = (score - (score * 0.1));
@@ -137,7 +176,8 @@ public class Results
             aScore = score - (score * 0.3);
             score = (int) aScore;
         }
-        else{
+        else
+        {
             score = score;
         }
     }
